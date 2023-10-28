@@ -12,7 +12,6 @@ function App() {
 
   return (
     <div>
-      <h1>Data from backend</h1>
       <ul>
         {data.map((item, index) => (
           <li key={index}>{item}</li>
