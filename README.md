@@ -7,7 +7,8 @@ This project focuses on
 
 
 ### Directory Structure
-
+- client
+- server
 
 
 ### Demo
