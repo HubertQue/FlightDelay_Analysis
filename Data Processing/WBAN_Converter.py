@@ -2,7 +2,7 @@ import pandas as pd
 import argparse
 
 
-def merge_and_process_data(wban_file, airport_file):
+def merge_and_process_data(wban_file, airport_file, to_file=False, output_mapping_csv='output.csv'):
     # read inputs
     df_WBAN = pd.read_csv(wban_file)
     np_airport = pd.read_csv(airport_file)['ORIGIN'].unique()
@@ -27,9 +27,13 @@ def merge_and_process_data(wban_file, airport_file):
     print("Data type of 'WBAN_ID' after conversion:", result['WBAN_ID'].dtype)
     result['WBAN_ID'] = result['WBAN_ID'].str.zfill(5)
 
+    result = result.drop(columns=['ORIGIN'])
+    if to_file:
+        result.to_csv(output_mapping_csv, mode='w', index=False)
+
     # result.to_csv(output_file, index=False)
     print(f"\nResults have been returned.")
-    return result.drop(columns=['ORIGIN'])
+    return result
 
 
 def get_station_id(wban_to_wmo_csv, sign_wban_df):
@@ -68,8 +72,9 @@ if __name__ == "__main__":
     WBAN_to_WMO_csv = args.wban_to_wmo
     output_mapping_csv = args.output
 
-    sign_WBAN_df = merge_and_process_data(sign_to_WBAN_csv, airport_delay_csv)
-    sign_stationID_df = get_station_id(WBAN_to_WMO_csv, sign_WBAN_df)
+    sign_WBAN_df = merge_and_process_data(sign_to_WBAN_csv, airport_delay_csv, to_file=True, output_mapping_csv=output_mapping_csv)
+    # sign_WBAN_df = merge_and_process_data(sign_to_WBAN_csv, airport_delay_csv)
+    # sign_stationID_df = get_station_id(WBAN_to_WMO_csv, sign_WBAN_df)
 
-    sign_stationID_df.to_csv(output_mapping_csv, mode='w', index=False)
+    # sign_stationID_df.to_csv(output_mapping_csv, mode='w', index=False)
     # columns: 'CALL_SIGN', 'stationID'
