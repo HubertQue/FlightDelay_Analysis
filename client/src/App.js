@@ -1,22 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import LineChart from './components/LineChart';
+import PieChart from './components/PieChart';
 
 function App() {
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    fetch('http://localhost:5000/data')
-      .then(response => response.json())
-      .then(data => setData(data.datas))
-      .catch(error => console.error('Error fetching data: ', error));
-  }, []);
-
+ 
   return (
     <div>
-      <ul>
-        {data.map((item, index) => (
-          <li key={index}>{item}</li>
-        ))}
-      </ul>
+      <LineChart />
+      <PieChart />
     </div>
   );
 }
