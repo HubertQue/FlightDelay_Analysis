@@ -1,8 +1,15 @@
 import os
 import pandas as pd
+import argparse
 
-data_dir = 'E:\\SFU\\classes\\CMPT-732\\Project\\get_data\\2020'
-output_file = 'E:\\SFU\\classes\\CMPT-732\\Project\\get_data\\full_2020.csv'
+parser = argparse.ArgumentParser(description='Data processing: Weather Data Merge & Clean')
+parser.add_argument('-i', '--input_dir', default='E:\\SFU\\classes\\CMPT-732\\Project\\get_data', help='input file dir')
+parser.add_argument('-o', '--output_dir', default='E:\\SFU\\classes\\CMPT-732\\Project\\get_data', help='output file dir')
+parser.add_argument('-y', '--year', default=2020, help='data of which year?')
+
+args = parser.parse_args()
+data_dir = os.path.join(args.input_dir, str(args.year))
+output_file = os.path.join(args.output_dir, 'weather_%s.csv' % str(args.year))
 
 df_list = []
 
