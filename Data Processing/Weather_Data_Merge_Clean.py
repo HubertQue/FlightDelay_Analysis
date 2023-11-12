@@ -77,7 +77,7 @@ for i in range(len(excluded_columns)):
 #------------clean data------------#
 
 ##------------replace with None------------##
-replace_list = [['TEMP', 9999.9], ['DEWP', 9999.9], ['VISIB', 999.9], ['WDSP', 999.9], ['MXSPD', 999.9], ['MAX', 999.9], ['MIN', 999.9], ['PRCP', 99.99], ['SNDP', 999.9]]
+replace_list = [['TEMP', 9999.9], ['DEWP', 9999.9], ['VISIB', 999.9], ['WDSP', 999.9], ['MXSPD', 999.9], ['MAX', 9999.9], ['MIN', 9999.9], ['PRCP', 99.99], ['SNDP', 999.9]]
 
 for i in range(len(replace_list)):
     df_merged = replace_by_none(df_merged, replace_list[i][0], replace_list[i][1])
