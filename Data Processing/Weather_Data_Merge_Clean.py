@@ -3,7 +3,7 @@ import pandas as pd
 import argparse
 
 
-def replace_by_none(data_frame, attribute_name, value):
+def replace_by_zero(data_frame, attribute_name, value):
     data_frame[attribute_name] = data_frame[attribute_name].replace(value, 0)
     return data_frame
 
@@ -24,6 +24,10 @@ def replace_by_none(data_frame, attribute_name, value):
         print('Special values in FRSHTT_str')
     return pd.Series(return_list)'''
 
+def replace_datetime(data_frame, attribute_name=''):
+    data_frame[attribute_name] = data_frame[attribute_name].replace(value, 0)
+    return data_frame
+
 
 def split_columns(FRSHTT_code):
     FRSHTT_str = str(FRSHTT_code)
@@ -43,46 +47,47 @@ def split_columns(FRSHTT_code):
     return pd.Series(return_list)
 
 
-parser = argparse.ArgumentParser(description='Data processing: Weather Data Merge & Clean')
-parser.add_argument('-i', '--input_dir', default='E:\\SFU\\classes\\CMPT-732\\Project\\get_data', help='input file dir')
-parser.add_argument('-o', '--output_dir', default='E:\\SFU\\classes\\CMPT-732\\Project\\get_data', help='output file dir')
-parser.add_argument('-y', '--year', default=2020, help='data of which year?')
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description='Data processing: Weather Data Merge & Clean')
+    parser.add_argument('-i', '--input_dir', default='E:\\SFU\\classes\\CMPT-732\\Project\\get_data', help='input file dir')
+    parser.add_argument('-o', '--output_dir', default='E:\\SFU\\classes\\CMPT-732\\Project\\get_data', help='output file dir')
+    parser.add_argument('-y', '--year', default=2020, help='data of which year?')
 
-args = parser.parse_args()
-data_dir = os.path.join(args.input_dir, str(args.year))
-output_file = os.path.join(args.output_dir, 'weather_%s.csv' % str(args.year))
+    args = parser.parse_args()
+    data_dir = os.path.join(args.input_dir, str(args.year))
+    output_file = os.path.join(args.output_dir, 'weather_%s.csv' % str(args.year))
 
-df_list = []
+    df_list = []
 
-files = os.listdir(data_dir)
-for file in files:
-    if not os.path.isdir(file) and os.path.splitext(file)[-1] == '.csv':
-        file_path = os.path.join(data_dir, file)
-        df_list.append(pd.read_csv(file_path))
+    files = os.listdir(data_dir)
+    for file in files:
+        if not os.path.isdir(file) and os.path.splitext(file)[-1] == '.csv':
+            file_path = os.path.join(data_dir, file)
+            df_list.append(pd.read_csv(file_path))
 
-df_merged = pd.concat(df_list, ignore_index=True)
+    df_merged = pd.concat(df_list, ignore_index=True)
 
-required_columns = ['STATION', 'DATE', 'ELEVATION', 'NAME', 'TEMP', 'DEWP', 'VISIB', 'WDSP', 'MXSPD', 'MAX', 'MIN', 'PRCP', 'SNDP', 'FRSHTT']
-optional_columns = ['LATITUDE', 'LONGITUDE', 'TEMP_ATTRIBUTES', 'DEWP_ATTRIBUTES', 'SLP_ATTRIBUTES', 'STP_ATTRIBUTES', 'VISIB_ATTRIBUTES', 'WDSP_ATTRIBUTES', 'GUST', 'MAX_ATTRIBUTES', 'MIN_ATTRIBUTES', 'PRCP_ATTRIBUTES']
-excluded_columns = ['SLP', 'STP',]
+    required_columns = ['STATION', 'DATE', 'ELEVATION', 'NAME', 'TEMP', 'DEWP', 'VISIB', 'WDSP', 'MXSPD', 'MAX', 'MIN', 'PRCP', 'SNDP', 'FRSHTT']
+    optional_columns = ['LATITUDE', 'LONGITUDE', 'TEMP_ATTRIBUTES', 'DEWP_ATTRIBUTES', 'SLP_ATTRIBUTES', 'STP_ATTRIBUTES', 'VISIB_ATTRIBUTES', 'WDSP_ATTRIBUTES', 'GUST', 'MAX_ATTRIBUTES', 'MIN_ATTRIBUTES', 'PRCP_ATTRIBUTES']
+    excluded_columns = ['SLP', 'STP',]
 
-#delete the optional_columns
-for i in range(len(optional_columns)):
-    df_merged = df_merged.drop(optional_columns[i], axis=1)
+    #delete the optional_columns
+    for i in range(len(optional_columns)):
+        df_merged = df_merged.drop(optional_columns[i], axis=1)
 
-#delete the excluded_columns
-for i in range(len(excluded_columns)):
-    df_merged = df_merged.drop(excluded_columns[i], axis=1)
+    #delete the excluded_columns
+    for i in range(len(excluded_columns)):
+        df_merged = df_merged.drop(excluded_columns[i], axis=1)
 
-#------------clean data------------#
+    #------------clean data------------#
 
-##------------replace with None------------##
-replace_list = [['TEMP', 9999.9], ['DEWP', 9999.9], ['VISIB', 999.9], ['WDSP', 999.9], ['MXSPD', 999.9], ['MAX', 9999.9], ['MIN', 9999.9], ['PRCP', 99.99], ['SNDP', 999.9]]
+    ##------------replace with None------------##
+    replace_list = [['TEMP', 9999.9], ['DEWP', 9999.9], ['VISIB', 999.9], ['WDSP', 999.9], ['MXSPD', 999.9], ['MAX', 9999.9], ['MIN', 9999.9], ['PRCP', 99.99], ['SNDP', 999.9]]
 
-for i in range(len(replace_list)):
-    df_merged = replace_by_none(df_merged, replace_list[i][0], replace_list[i][1])
+    for i in range(len(replace_list)):
+        df_merged = replace_by_zero(df_merged, replace_list[i][0], replace_list[i][1])
 
-##------------Split FRSHTT to 6 columns ------------##
-df_merged[['Fog', 'Rain or Drizzle', 'Snow or Ice Pellets', 'Hail','Thunder','Tornado or Funnel Cloud']] = df_merged['FRSHTT'].apply(split_columns)
+    ##------------Split FRSHTT to 6 columns ------------##
+    df_merged[['Fog', 'Rain or Drizzle', 'Snow or Ice Pellets', 'Hail','Thunder','Tornado or Funnel Cloud']] = df_merged['FRSHTT'].apply(split_columns)
 
-df_merged.to_csv(output_file, index=False)
+    df_merged.to_csv(output_file, index=False)
