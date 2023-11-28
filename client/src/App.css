@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+
+nav {
+  border: 1px solid #333; /* 设置边框的大小、样式和颜色 */
+  padding: 10px; /* 设置内边距，使得内容与边框之间有些距离 */
+  margin: 10px; /* 设置外边距，使得导航栏与其他元素之间有些距离 */
+  border-radius: 5px; /* 设置边框圆角 */
+}
+
