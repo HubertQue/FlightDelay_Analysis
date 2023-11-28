@@ -1,0 +1,51 @@
+/* .home-page {
+  text-align: center;
+}-->
+
+.home-page img {
+  margin: 0 auto;
+  display: block;
+}*/
+
+
+.airplane_image {
+  position: absolute; /* 绝对定位 */
+  text-align: center;
+  /*top: 25px; /* 距离顶部的距离 */
+  /*left: 0px; /* 距离右侧的距离 */
+  height: 45px; /* 设置图片高度，可以根据需要调整 */
+  
+}
+
+.airplane_image {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%;
+  height: 50%;
+}
+
+.container {
+  display: flex;
+  margin-top: 500px;
+  justify-content: space-around; /* 使块之间分布均匀 */
+}
+
+.block {
+
+  flex: 1; /* 每个块平均分配空间 */
+  height: 200px;
+  padding: 20px;
+  text-align: center;
+  border: 1px solid #000;
+}
+
+.block {
+  flex-basis: 30%; /* 设置每个块的基础宽度为容器宽度的30% */
+  height: 180px;
+  padding: 20px;
+  text-align: center;
+  border: 5px solid #000;
+  margin: 10px; /* 在块之间添加外边距 */
+}

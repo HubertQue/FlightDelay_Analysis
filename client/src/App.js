@@ -7,8 +7,9 @@ import Navbar from './components/Navbar';
 
 import TrainingModels from './components/TrainingModels';
 import DataAnalysis from './components/DataAnalysis';
-import DeepLearning from './components/DeepLearning';
+import WeatherForm from './components/WeatherForm';
 import HomePage from './components/HomePage';
+
 
 function App() {
  
@@ -21,7 +22,7 @@ function App() {
           <Route path="/HomePage" element={<HomePage />} />
           <Route path="/DataAnalysis" element={<DataAnalysis />} />
           <Route path="/TrainingModels" element={<TrainingModels />} />
-          <Route path="/DeepLearning" element={<DeepLearning />} />
+          <Route path="/WeatherForm" element={<WeatherForm />} />
         </Routes>
           
       </BrowserRouter>

@@ -10,7 +10,8 @@ function Navbar() {
       <Link to="/HomePage">HomePage</Link>
       <Link to="/DataAnalysis">DataAnalysis</Link>
       <Link to="/TrainingModels">TrainingModels</Link>
-      <Link to="/DeepLearning">DeepLearning</Link>
+       {/* <Link to="/DeepLearning">DeepLearning</Link> */}
+       <Link to="/WeatherForm">WeatherForm</Link>
       <img src={logo} alt="Logo" className="navbar-logo" /> {/* 添加图片并赋予类名 */}
 
     </div>
