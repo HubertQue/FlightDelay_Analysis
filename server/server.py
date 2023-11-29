@@ -10,19 +10,15 @@ def get_value(string_name, df):
 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
-print('sdasdasda')
-file_path = "../Data Analyzing/CSV Files/"
 
+
+file_path = "../Data Analyzing/CSV Files/"
 
 '''path2 = "Graph_4_Hour.csv"
 full_path = os.path.join(file_path, path2)
 df = pd.read_csv(full_path)
 
-
-
 print(df)
-
-
 
 print(({"label": get_value('HOUR', df),
           "attribute1": get_value('num_delays', df),
@@ -37,9 +33,6 @@ print({"label": get_value('MONTH', df),
           "data": get_value('avg_delay_time', df),
           })
 
-
-
-print('---------------------------')
 
 label_list = []
 data_list = []
@@ -65,19 +58,16 @@ for file_name in file_list:
 
     # 假设 'SNDP' 和 'avg_delay_time' 是在最后一个文件中
     # 读取最后一个文件
-#last_file_path = os.path.join(file_path, "Graph_19_SNDP.csv")
-#df_last = pd.read_csv(last_file_path)
+    #last_file_path = os.path.join(file_path, "Graph_19_SNDP.csv")
+    #df_last = pd.read_csv(last_file_path)
 
 print ({
         "label": label_list,
        "data": flattened_list,
     })
 
-  
 
-
-
-@app.route("/lineChartData/year")
+@app.route("/lineChartData/Year")
 def getLineChartDataYear():
   path2 = "Graph_1_Year.csv"
   full_path = os.path.join(file_path, path2)
@@ -132,19 +122,19 @@ def getLineChartDataElevation():
   df = pd.read_csv(full_path)
 
   
-  return ({"label": get_value('ELEVATION', df),
+  return ({"label": get_value('ELEVATION_CATEGORY', df),
           "data": get_value('avg_delay_time', df),
           })
 
 
-@app.route("/barChartData/Temp")
+@app.route("/barChartData/Temperature")
 def getLineChartDataTemp():
   path2 = "Graph_10_Temp.csv"
   full_path = os.path.join(file_path, path2)
   df = pd.read_csv(full_path)
 
   
-  return ({"label": get_value('TEMP', df),
+  return ({"label": get_value('TEMP_CATEGORY', df),
           "data": get_value('avg_delay_time', df),
           })
 
@@ -156,7 +146,7 @@ def getLineChartDataDEWP():
   df = pd.read_csv(full_path)
 
   
-  return ({"label": get_value('DEWP', df),
+  return ({"label": get_value('DEWP_CATEGORY', df),
           "data": get_value('avg_delay_time', df),
           })
 
@@ -193,7 +183,7 @@ def getLineChartDataWDSP():
   df = pd.read_csv(full_path)
 
   
-  return ({"label": get_value('WDSP', df),
+  return ({"label": get_value('WDSP_CATEGORY', df),
           "data": get_value('avg_delay_time', df),
           })
 
@@ -205,7 +195,7 @@ def getLineChartDataMXSPD():
   df = pd.read_csv(full_path)
 
   
-  return ({"label": get_value('MXSPD', df),
+  return ({"label": get_value('MXSPD_CATEGORY', df),
           "data": get_value('avg_delay_time', df),
           })
 
@@ -217,7 +207,7 @@ def getLineChartDataPRCP():
   df = pd.read_csv(full_path)
 
   
-  return ({"label": get_value('PRCP', df),
+  return ({"label": get_value('PRCP_CATEGORY', df),
           "data": get_value('avg_delay_time', df),
           })
 
@@ -229,7 +219,7 @@ def getLineChartDataSNDP():
   df = pd.read_csv(full_path)
 
   
-  return ({"label": get_value('SNDP', df),
+  return ({"label": get_value('SNDP_CATEGORY', df),
           "data": get_value('avg_delay_time', df),
           })
 

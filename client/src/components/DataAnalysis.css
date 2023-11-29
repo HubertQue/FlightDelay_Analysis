@@ -27,7 +27,10 @@
 }
 
 .content {
+  border: 1px black solid;
   flex-grow: 1;
   background-color: #fff;
   padding: 20px;
+  /* height: 700px;
+  width: 700px; */
 }

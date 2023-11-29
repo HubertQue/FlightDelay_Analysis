@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import './DataAnalysis.css'; 
+import LineChart from './LineChart';
+import BarChart from './BarChart';
+import StateMap from './StateMap';
 
 const Sidebar = ({ onItemSelected }) => {
   return (
     <div className="sidebar">
-      <button onClick={() => onItemSelected('GraphByTime')}>Time Graph</button>
-      <button onClick={() => onItemSelected('GraphByLocation')}>Location Graph</button>
-      <button onClick={() => onItemSelected('GraphByWeather')}>Weather Graph</button>
+      <button onClick={() => onItemSelected('time')}>Analysis By Time</button>
+      <button onClick={() => onItemSelected('geography')}>Analysis By Geography</button>
+      <button onClick={() => onItemSelected('weather')}>Analysis By Weather</button>
+
     </div>
   );
 };
@@ -15,7 +19,6 @@ const SecondaryNavbar = ({ filters, onFilterSelected }) => {
   if (!filters) {
     return null; 
   }
-  // console.log("filters: ", filters)
   return (
     <div className="secondary-navbar">
       {filters.map((filter) => (
@@ -27,11 +30,47 @@ const SecondaryNavbar = ({ filters, onFilterSelected }) => {
   );
 };
 
-const Content = ({ selectedItem, allFilters, secondaryFilter}) => {
+
+const Content = ({ selectedItem, secondaryFilter}) => {
+  const renderChart = () => {
+    switch(secondaryFilter) {
+      case "Year": 
+        return <LineChart props="Year"/>;
+      case "Month": 
+        return <LineChart props="Month"/>;
+      case "Week": 
+        return <LineChart props="Week"/>;
+      case "Hour": 
+        return <LineChart props="Hour"/>;
+      case "Country": 
+        return <StateMap />;
+      case "City": 
+        return <></>;
+      case "Elevation": 
+        return <BarChart props="Elevation"/>;
+      case "Temperature": 
+        return <BarChart props="Temperature"/>;
+      case "DEWP": 
+        return <BarChart props="DEWP"/>;
+      case "VISIB": 
+        return ;
+      case "WDSP": 
+        return <BarChart props="WDSP"/>;
+      case "PRCP": 
+        return <BarChart props="PRCP"/>;
+      case "SNDP": 
+        return <BarChart props="SNDP"/>;
+      case "FRSHTT": 
+        return ;
+      default:
+        return <div>Click Tag</div>
+    }
+  }
+
   return (
     <div className="content">
-      {/* <SecondaryNavbar filters={allFilters} onFilterSelected={(filter) => console.log(filter)} /> */}
       <h2>Displaying content for {selectedItem} with filter: {secondaryFilter}</h2>
+      {renderChart()}
     </div>
   );
 };
@@ -42,19 +81,18 @@ const DataAnalysis = () => {
   const [secondaryFilter, setSecondaryFilter] = useState('');
 
   const allFiltersMap = {
-    'GraphByTime': ['Graph By Year', 'Graph By month', 'Graph By Week'],
-    'GraphByLocation': ['Graph By Country', 'Graph By State', 'Graph By City'],
-    'GraphByWeather': ['Graph By Temperature', 'Graph By Precipitation']
+    'time': ['Year', 'Month', 'Week', 'Hour'],
+    'geography': ['Country', 'City'],
+    'weather': ['Elevation', 'Temperature', 'DEWP', 'visibility', ' WDSP', 'PRCP','SNDP', 'FRSHTT']
   };
 
-  // // 当selectedItem改变时，自动设置secondaryFilter为该项目的第一个次级选项
-  // useEffect(() => {
-  //   const filters = allFiltersMap[selectedItem];
-  //   if (filters && filters.length > 0) {
-  //     setSecondaryFilter(filters[0]); // 设置为第一个次级选项
-  //   }
-  // }, [selectedItem]); // 依赖数组中包含selectedItem，当它变化时触发效果
 
+  useEffect(() => {
+    const filters = allFiltersMap[selectedItem];
+    if (filters && filters.length > 0) {
+      setSecondaryFilter(filters[0]); // 
+    }
+  }, [selectedItem]); // 
 
   const allFilters = allFiltersMap[selectedItem];
 
