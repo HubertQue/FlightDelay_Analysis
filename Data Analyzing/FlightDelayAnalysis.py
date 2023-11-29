@@ -117,13 +117,20 @@ def main():
     print(df_top_cities.show())
     df_top_cities.coalesce(1).write.csv('Graph_8', header=True, mode='overwrite')
 
+    # Function to categorize elevation
+    def categorize_elevation(elevation):
+        return ((int(elevation / 100)) + 1) * 100
+
+    categorize_elevation_udf = udf(categorize_elevation, IntegerType())
+
     # GRAPH 9: Delays by Elevation
     elevation_analysis = df_delayed.filter(col("ELEVATION").isNotNull())
     elevation_analysis = elevation_analysis.withColumn("ELEVATION", elevation_analysis["ELEVATION"].cast(FloatType()))
-    elevation_analysis = elevation_analysis.groupBy("ELEVATION").agg(
+    elevation_analysis = elevation_analysis.withColumn("ELEVATION_CATEGORY", categorize_elevation_udf(col("ELEVATION")))
+    elevation_analysis = elevation_analysis.groupBy("ELEVATION_CATEGORY").agg(
         count("DEP_DELAY").alias("num_delays"),
         format_number(avg("DEP_DELAY"), 2).alias("avg_delay_time")
-    ).orderBy(col("ELEVATION").desc())
+    ).orderBy(col("ELEVATION_CATEGORY"))
     print(elevation_analysis.show())
     elevation_analysis.coalesce(1).write.csv('Graph_9', header=True, mode='overwrite')
 
@@ -134,24 +141,38 @@ def main():
 
     fahrenheit_to_celsius_udf = udf(fahrenheit_to_celsius, FloatType())
 
+    # Function to categorize temperature
+    def categorize_temperature(temp):
+        return int((temp + 40) // 5) * 5 - 35
+
+    categorize_temperature_udf = udf(categorize_temperature, IntegerType())
+
     # GRAPH 10: Delays by Temp
     temp_analysis = df_delayed.filter(col("TEMP").isNotNull())
     temp_analysis = temp_analysis.withColumn("TEMP", df["TEMP"].cast(FloatType()))
     temp_analysis = temp_analysis.withColumn("TEMP", fahrenheit_to_celsius_udf(col("TEMP")))
-    temp_analysis = temp_analysis.groupBy("TEMP").agg(
+    temp_analysis = temp_analysis.withColumn("TEMP_CATEGORY", categorize_temperature_udf(col("TEMP")))
+    temp_analysis = temp_analysis.groupBy("TEMP_CATEGORY").agg(
         count("DEP_DELAY").alias("num_delays"),
         format_number(avg("DEP_DELAY"), 2).alias("avg_delay_time")
-    ).orderBy("TEMP")
+    ).orderBy("TEMP_CATEGORY")
     print(temp_analysis.show())
     temp_analysis.coalesce(1).write.csv('Graph_10', header=True, mode='overwrite')
+
+    # Function to categorize dew point
+    def categorize_dew_point(dewp):
+        return int((dewp + 40) // 5) * 5 - 35
+
+    categorize_dew_point_udf = udf(categorize_dew_point, IntegerType())
 
     # GRAPH 11: Delays by DEWP
     dewp_analysis = df_delayed.filter(col("DEWP").isNotNull())
     dewp_analysis = dewp_analysis.withColumn("DEWP", df["DEWP"].cast(FloatType()))
-    dewp_analysis = dewp_analysis.groupBy("DEWP").agg(
+    dewp_analysis = dewp_analysis.withColumn("DEWP_CATEGORY", categorize_dew_point_udf(col("DEWP")))
+    dewp_analysis = dewp_analysis.groupBy("DEWP_CATEGORY").agg(
         count("DEP_DELAY").alias("num_delays"),
         format_number(avg("DEP_DELAY"), 2).alias("avg_delay_time")
-    ).orderBy("DEWP")
+    ).orderBy("DEWP_CATEGORY")
     print(dewp_analysis.show())
     dewp_analysis.coalesce(1).write.csv('Graph_11', header=True, mode='overwrite')
 
@@ -209,43 +230,71 @@ def main():
     print(visib_cities.show())
     visib_cities.coalesce(1).write.csv('Graph_15', header=True, mode='overwrite')
 
+    # Function to categorize wind speed
+    def categorize_wind_speed(wdsp):
+        return int((wdsp // 5) * 5 + 5)
+
+    categorize_wind_speed_udf = udf(categorize_wind_speed, IntegerType())
+
     # GRAPH 16: Delays by WDSP
     wdsp_analysis = df_delayed.filter(col("WDSP").isNotNull())
     wdsp_analysis = wdsp_analysis.withColumn("WDSP", df["WDSP"].cast(FloatType()))
-    wdsp_analysis = wdsp_analysis.groupBy("WDSP").agg(
+    wdsp_analysis = wdsp_analysis.withColumn("WDSP_CATEGORY", categorize_wind_speed_udf(col("WDSP")))
+    wdsp_analysis = wdsp_analysis.groupBy("WDSP_CATEGORY").agg(
         count("DEP_DELAY").alias("num_delays"),
         format_number(avg("DEP_DELAY"), 2).alias("avg_delay_time")
-    ).orderBy("WDSP")
+    ).orderBy("WDSP_CATEGORY")
     print(wdsp_analysis.show())
     wdsp_analysis.coalesce(1).write.csv('Graph_16', header=True, mode='overwrite')
+
+    # Function to categorize maximum sustained wind speed
+    def categorize_max_wind_speed(mxspd):
+        return int((mxspd // 10) * 10 + 10)
+
+    categorize_max_wind_speed_udf = udf(categorize_max_wind_speed, IntegerType())
 
     # GRAPH 17: Delays by MXSPD
     mxspd_analysis = df_delayed.filter(col("MXSPD").isNotNull())
     mxspd_analysis = mxspd_analysis.withColumn("MXSPD", df["MXSPD"].cast(FloatType()))
-    mxspd_analysis = mxspd_analysis.groupBy("MXSPD").agg(
+    mxspd_analysis = mxspd_analysis.withColumn("MXSPD_CATEGORY", categorize_max_wind_speed_udf(col("MXSPD")))
+    mxspd_analysis = mxspd_analysis.groupBy("MXSPD_CATEGORY").agg(
         count("DEP_DELAY").alias("num_delays"),
         format_number(avg("DEP_DELAY"), 2).alias("avg_delay_time")
-    ).orderBy("MXSPD")
+    ).orderBy("MXSPD_CATEGORY")
     print(mxspd_analysis.show())
     mxspd_analysis.coalesce(1).write.csv('Graph_17', header=True, mode='overwrite')
+
+    # Function to categorize precipitation
+    def categorize_precipitation(prcp):
+        return int((prcp // 2) * 2 + 2)
+
+    categorize_precipitation_udf = udf(categorize_precipitation, IntegerType())
 
     # GRAPH 18: Delays by PRCP
     prcp_analysis = df_delayed.filter(col("PRCP").isNotNull())
     prcp_analysis = prcp_analysis.withColumn("PRCP", df["PRCP"].cast(FloatType()))
-    prcp_analysis = prcp_analysis.groupBy("PRCP").agg(
+    prcp_analysis = prcp_analysis.withColumn("PRCP_CATEGORY", categorize_precipitation_udf(col("PRCP")))
+    prcp_analysis = prcp_analysis.groupBy("PRCP_CATEGORY").agg(
         count("DEP_DELAY").alias("num_delays"),
         format_number(avg("DEP_DELAY"), 2).alias("avg_delay_time")
-    ).orderBy("PRCP")
+    ).orderBy("PRCP_CATEGORY")
     print(prcp_analysis.show())
     prcp_analysis.coalesce(1).write.csv('Graph_18', header=True, mode='overwrite')
+
+    # Function to categorize snow depth
+    def categorize_snow_depth(sndp):
+        return int((sndp // 5) * 5 + 5)
+
+    categorize_snow_depth_udf = udf(categorize_snow_depth, IntegerType())
 
     # GRAPH 19: Delays by SNDP
     sndp_analysis = df_delayed.filter(col("SNDP").isNotNull())
     sndp_analysis = sndp_analysis.withColumn("SNDP", df["SNDP"].cast(FloatType()))
-    sndp_analysis = sndp_analysis.groupBy("SNDP").agg(
+    sndp_analysis = sndp_analysis.withColumn("SNDP_CATEGORY", categorize_snow_depth_udf(col("SNDP")))
+    sndp_analysis = sndp_analysis.groupBy("SNDP_CATEGORY").agg(
         count("DEP_DELAY").alias("num_delays"),
         format_number(avg("DEP_DELAY"), 2).alias("avg_delay_time")
-    ).orderBy("SNDP")
+    ).orderBy("SNDP_CATEGORY")
     print(sndp_analysis.show())
     sndp_analysis.coalesce(1).write.csv('Graph_19', header=True, mode='overwrite')
 
