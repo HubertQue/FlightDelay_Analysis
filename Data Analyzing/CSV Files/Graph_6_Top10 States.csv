@@ -1,0 +1,121 @@
+MONTH,ORIGIN_STATE_NM,num_delays,avg_delay_time
+January,Arizona,4918,28.85
+January,California,19502,33.29
+January,Florida,13888,34.39
+January,Georgia,8915,29.97
+January,Illinois,12181,38.02
+January,Nevada,4708,27.92
+January,New York,7151,41.63
+January,North Carolina,9367,33.69
+January,Texas,17730,35.21
+January,Washington,7405,29.94
+February,Arizona,4656,27.44
+February,California,16173,35.16
+February,Florida,14256,38.34
+February,Georgia,9942,38.27
+February,Illinois,11239,43.41
+February,Nevada,4043,28.21
+February,New York,7002,48.50
+February,North Carolina,10069,47.22
+February,Texas,15752,32.54
+February,Washington,5699,27.75
+March,Arizona,4053,30.55
+March,California,11402,34.09
+March,Florida,8038,34.02
+March,Georgia,5166,27.24
+March,Illinois,6341,32.56
+March,Nevada,3181,41.18
+March,New York,3946,36.66
+March,North Carolina,5244,33.98
+March,Texas,10965,36.89
+March,Washington,3701,30.21
+April,Arizona,686,29.03
+April,California,1654,31.06
+April,Florida,1327,33.52
+April,Georgia,1040,27.66
+April,Illinois,1230,32.28
+April,Nevada,519,33.35
+April,New York,468,46.94
+April,North Carolina,951,36.23
+April,Texas,2165,30.61
+April,Washington,560,28.51
+May,Arizona,719,21.38
+May,California,1748,24.54
+May,Florida,1380,34.72
+May,Georgia,1133,21.63
+May,Illinois,1541,27.08
+May,Nevada,751,18.47
+May,New York,346,33.08
+May,North Carolina,1248,32.98
+May,Texas,3009,28.51
+May,Washington,853,21.64
+June,Arizona,1084,21.37
+June,California,2967,24.37
+June,Florida,2538,27.83
+June,Georgia,1823,20.66
+June,Illinois,2800,24.98
+June,Nevada,1512,19.45
+June,New York,634,34.70
+June,North Carolina,1605,31.45
+June,Texas,4715,28.58
+June,Washington,1563,19.05
+July,Arizona,1319,31.27
+July,California,4092,30.41
+July,Florida,4079,37.17
+July,Georgia,3775,29.01
+July,Illinois,3639,34.62
+July,Nevada,1861,24.28
+July,New York,1177,45.65
+July,North Carolina,3218,46.87
+July,Texas,6503,34.72
+July,Washington,1842,23.93
+August,Arizona,1404,28.34
+August,California,4426,28.43
+August,Florida,3701,34.90
+August,Georgia,4282,30.28
+August,Illinois,3303,31.43
+August,Nevada,2199,22.62
+August,New York,1017,35.78
+August,North Carolina,3570,33.55
+August,Texas,6309,31.29
+August,Washington,2077,22.85
+September,Arizona,1471,25.87
+September,California,4002,27.06
+September,Florida,3028,31.52
+September,Georgia,2786,21.48
+September,Illinois,2999,25.32
+September,Nevada,1762,20.92
+September,New York,736,29.16
+September,North Carolina,2390,26.19
+September,Texas,7166,29.69
+September,Washington,1813,24.24
+October,Arizona,1757,30.18
+October,California,4790,31.70
+October,Florida,3922,34.05
+October,Georgia,3217,25.07
+October,Illinois,3657,25.70
+October,Nevada,2145,22.94
+October,New York,1025,39.89
+October,North Carolina,2969,27.95
+October,Texas,8888,34.61
+October,Washington,2177,25.42
+November,Arizona,1974,26.90
+November,California,4722,27.99
+November,Florida,4310,31.01
+November,Georgia,3206,24.56
+November,Illinois,2991,29.20
+November,Nevada,1765,22.29
+November,New York,1202,38.87
+November,North Carolina,2544,28.69
+November,Texas,6830,32.94
+November,Washington,2045,27.36
+December,Arizona,2694,30.06
+December,California,5989,31.27
+December,Florida,6963,29.71
+December,Georgia,4960,24.70
+December,Illinois,4461,29.84
+December,Nevada,2050,23.90
+December,New York,2275,46.01
+December,North Carolina,3455,30.21
+December,Texas,10525,34.57
+December,Washington,2339,25.78
