@@ -45,7 +45,7 @@ class MLPWithSkipConnection(nn.Module):
         # Skip Connection
         skip = self.skip_connection(x)
         combined = x2 + skip
-        output = self.output_layer(combined)
+        output = self.output_layer(combined) 
         output = self.sigmoid(output)
 
         return output
