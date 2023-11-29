@@ -2,9 +2,10 @@ import pandas as pd
 import numpy as np
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.model_selection import train_test_split
+from imblearn.over_sampling import RandomOverSampler
 from sklearn.neural_network import MLPClassifier
 from sklearn.preprocessing import StandardScaler
-from sklearn.metrics import accuracy_score, classification_report, f1_score
+from sklearn.metrics import accuracy_score, classification_report, f1_score, matthews_corrcoef
 from tqdm import tqdm
 
 # 设置你的CSV文件路径
@@ -67,16 +68,19 @@ scaler = StandardScaler()
 X_train_scaled = scaler.fit_transform(X_train)
 X_test_scaled = scaler.transform(X_test)
 
-epochs = 10  # 定义迭代次数
+oversampler = RandomOverSampler(random_state=42)
+X_resampled, y_resampled = oversampler.fit_resample(X_train_scaled, y_train)
+
+epochs = 2  # 定义迭代次数
 batch_size = 256  # 批量大小
-hidden_layer_size = (100, 100)
+hidden_layer_size = (50, 50)
 
 # 创建 MLP 模型
-mlp = MLPClassifier(hidden_layer_sizes=hidden_layer_size, batch_size=batch_size, max_iter=1, warm_start=True, random_state=42, class_weights='balanced')
+mlp = MLPClassifier(hidden_layer_sizes=hidden_layer_size, batch_size=batch_size, max_iter=1, warm_start=True, random_state=42)
 
 with tqdm(total=epochs, desc=f'Processing', unit='iteration') as pbar:
     for epoch in range(epochs):
-        mlp.partial_fit(X_train_scaled, y_train, classes=class_set)
+        mlp.partial_fit(X_resampled, y_resampled, classes=class_set)
         pbar.update(1)
 
 # 进行预测
@@ -85,6 +89,9 @@ y_pred = mlp.predict(X_test_scaled)
 # 评估模型
 accuracy = accuracy_score(y_test, y_pred)
 f1 = f1_score(y_test, y_pred, average='weighted')
+# 计算 Matthews 相关系数
+mcc = matthews_corrcoef(y_test, y_pred)
 print("Accuracy:", accuracy)
 print("F1 Score:", f1)
+print(f"Matthews Correlation Coefficient: {mcc}")
 print("\nClassification Report:\n", classification_report(y_test, y_pred))
