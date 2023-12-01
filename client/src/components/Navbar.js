@@ -1,21 +1,33 @@
-import React from 'react'
+import React from 'react';
 import { Link } from 'react-router-dom';
-import './Navbar.css';
-import logo from '../../src/sfu_logo.png';
+import logo from '../../src/static/airplane_icon.png';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import Button from '@mui/material/Button';
 
 function Navbar() {
   return (
-    <div className="navbar-container">
-
-      <Link to="/HomePage">HomePage</Link>
-      <Link to="/DataAnalysis">DataAnalysis</Link>
-      <Link to="/TrainingModels">TrainingModels</Link>
-       {/* <Link to="/DeepLearning">DeepLearning</Link> */}
-       <Link to="/WeatherForm">WeatherForm</Link>
-      <img src={logo} alt="Logo" className="navbar-logo" /> {/* 添加图片并赋予类名 */}
-
-    </div>
-  )
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="static"> 
+        <Toolbar>
+          <IconButton
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{ mr: 2 }}
+          >
+          </IconButton>
+          <img src={logo} alt="Logo" style={{ marginRight: '20px', width: '50px', height: '50px' }} />
+          <Button color="inherit" component={Link} to="/HomePage" sx={{ fontSize: '1rem', marginLeft:20, marginRight: 20 }}>Home Page</Button>
+          <Button color="inherit" component={Link} to="/DataAnalysis" sx={{ fontSize: '1rem',marginRight: 20 }}>Data Analysis</Button>
+          <Button color="inherit" component={Link} to="/TrainingModels" sx={{ fontSize: '1rem',marginRight: 20 }}>Models</Button>
+          <Button color="inherit" component={Link} to="/WeatherForm" sx={{ fontSize: '1rem',marginRight: 10 }}>Weather Form</Button>
+        </Toolbar>
+      </AppBar>
+    </Box>
+  );
 }
 
-export default Navbar
+export default Navbar;

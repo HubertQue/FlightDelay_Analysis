@@ -22,7 +22,7 @@
 
 .secondary-navbar {
   display: flex;
-  background-color: #ddd;
+  background-color: #242F3E;
   padding: 10px;
 }
 
@@ -34,3 +34,10 @@
   /* height: 700px;
   width: 700px; */
 }
+
+.secondary-navbar button{
+  margin-left: 20px;
+  margin-right: 20px; /* 或你希望的任何数值 */
+}
+
+
