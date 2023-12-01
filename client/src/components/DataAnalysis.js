@@ -128,7 +128,7 @@ const Content = ({ selectedItem, secondaryFilter}) => {
 
 // 主组件
 const DataAnalysis = () => {
-  const [selectedItem, setSelectedItem] = useState('filter');
+  const [selectedItem, setSelectedItem] = useState('time');
   const [secondaryFilter, setSecondaryFilter] = useState('');
 
   const allFiltersMap = {

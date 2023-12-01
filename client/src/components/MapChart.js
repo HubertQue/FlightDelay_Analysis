@@ -11,7 +11,7 @@ const MapChart = ({ data }) => {
   const colorScale = d3.scaleLinear()
                        .domain([Math.min(...data.map(item => item.value)), Math.max(...data.map(item => item.value))])
                        .range(["#ffedea", "#ff5233"]);
-
+  console.log(Math.max(...data.map(item => item.value)))
   // 鼠标悬停事件处理函数
   const handleMouseEnter = (geo, cur, event) => {
     // 获取鼠标位置和地图容器的偏移量
@@ -67,7 +67,9 @@ const MapChart = ({ data }) => {
         <Geographies geography={geoUrl}>
           {({ geographies }) =>
             geographies.map(geo => {
-              const cur = data.find(s => s.id === geo.id);
+              // console.log(geo.properties.name)
+              // console.log(data[0])
+              const cur = data.find(s => s.key === geo.properties.name);
               return (
                 <Geography
                   key={geo.rsmKey}
