@@ -4,31 +4,82 @@ import LineChart from './LineChart';
 import BarChart from './BarChart';
 import StateMap from './StateMap';
 
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import TimelineIcon from '@mui/icons-material/Timeline';
+import LandscapeIcon from '@mui/icons-material/Landscape'; // 假设这是 Geography 图标
+import WeatherIcon from '@mui/icons-material/WbSunny'; // 假设这是 Weather 图标
+
+
 const Sidebar = ({ onItemSelected }) => {
   return (
-    <div className="sidebar">
-      <button onClick={() => onItemSelected('time')}>Analysis By Time</button>
-      <button onClick={() => onItemSelected('geography')}>Analysis By Geography</button>
-      <button onClick={() => onItemSelected('weather')}>Analysis By Weather</button>
-
-    </div>
+    <Box
+      sx={{
+        width: 240,
+        bgcolor: '#222D32', 
+        color: 'white', 
+        '& .MuiListItemIcon-root': {
+          color: 'white', 
+        },
+        '& .MuiListItemText-primary': { 
+          color: 'white', 
+        }
+      }}
+    >
+      <List>
+        <ListItem button onClick={() => onItemSelected('time')}>
+          <ListItemIcon>
+            <TimelineIcon />
+          </ListItemIcon>
+          <ListItemText primary="Analysis By Time" />
+        </ListItem>
+        <ListItem button onClick={() => onItemSelected('geography')}>
+          <ListItemIcon>
+            <LandscapeIcon />
+          </ListItemIcon>
+          <ListItemText primary="Analysis By Geography" />
+        </ListItem>
+        <ListItem button onClick={() => onItemSelected('weather')}>
+          <ListItemIcon>
+            <WeatherIcon />
+          </ListItemIcon>
+          <ListItemText primary="Analysis By Weather" />
+        </ListItem>
+      </List>
+    </Box>
   );
 };
 
-const SecondaryNavbar = ({ filters, onFilterSelected }) => {
+const SecondaryNavbar = ({ filters, onFilterSelected, selectedFilter }) => {
   if (!filters) {
-    return null; 
+    return null;
   }
+  
   return (
-    <div className="secondary-navbar">
+    <div className="secondary-navbar" >
       {filters.map((filter) => (
-        <button key={filter} onClick={() => onFilterSelected(filter)}>
+        <Button
+          key={filter}
+          onClick={() => onFilterSelected(filter)}
+          variant="outlined"
+          style={{
+            margin: '0 8px', // 设置按钮间距
+            color: selectedFilter === filter ? 'darkslategray' : 'white', // 选中的按钮用深色文字，未选中的用白色文字
+            borderColor: 'white', // 边框颜色设置为白色
+            backgroundColor: selectedFilter === filter ? 'white' : 'transparent' // 选中的按钮背景为白色
+          }}
+        >
           {filter}
-        </button>
+        </Button>
       ))}
     </div>
   );
 };
+
 
 
 const Content = ({ selectedItem, secondaryFilter}) => {
@@ -69,7 +120,7 @@ const Content = ({ selectedItem, secondaryFilter}) => {
 
   return (
     <div className="content">
-      <h2>Displaying content for {selectedItem} with filter: {secondaryFilter}</h2>
+      {/* <h2>Displaying content for {selectedItem} with filter: {secondaryFilter}</h2> */}
       {renderChart()}
     </div>
   );
@@ -85,7 +136,6 @@ const DataAnalysis = () => {
     'geography': ['Country', 'City'],
     'weather': ['Elevation', 'Temperature', 'DEWP', 'visibility', ' WDSP', 'PRCP','SNDP', 'FRSHTT']
   };
-
 
   useEffect(() => {
     const filters = allFiltersMap[selectedItem];
