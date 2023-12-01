@@ -29,9 +29,27 @@ full_path = os.path.join(file_path, path2)
 df = pd.read_csv(full_path)
 df = df.drop(df.index[0])
 
-print({"label": get_value('MONTH', df),
-          "data": get_value('avg_delay_time', df),
-          })
+# print({"label": get_value('MONTH', df),
+#           "data": get_value('avg_delay_time', df),
+#           })
+
+df = pd.read_csv(os.path.join(file_path, "Graph_5_State.csv"))
+
+data = {"state": get_value('ORIGIN_STATE_NM', df),
+          "average": get_value('avg_delay_time',df)}
+state_avg_dict = dict(zip(data['state'], data['average']))
+
+result_list = []
+for key in state_avg_dict:
+   result_list.append({key: state_avg_dict[key]})
+
+result_list2 = []
+for d in result_list:
+    for key, value in d.items():
+        result_list2.append({'key': key, 'value': value})
+
+
+print(result_list2)
 
 
 label_list = []
@@ -40,9 +58,9 @@ file_list = ["Graph_20_Fog.csv", "Graph_21_Rain_Drizzle.csv", "Graph_22_Snow_Ice
 
 for file_name in file_list:
       full_path = os.path.join(file_path, file_name)
-      print(full_path)
+      # print(full_path)
       df = pd.read_csv(full_path)
-      print(df)
+      # print(df)
       filename_without_extension = file_name.split('.csv')[0]
 
       parts = filename_without_extension.split('_')
@@ -61,10 +79,13 @@ for file_name in file_list:
     #last_file_path = os.path.join(file_path, "Graph_19_SNDP.csv")
     #df_last = pd.read_csv(last_file_path)
 
-print ({
-        "label": label_list,
-       "data": flattened_list,
-    })
+# print ({
+#         "label": label_list,
+#        "data": flattened_list,
+#     })
+
+
+
 
 
 @app.route("/lineChartData/Year")
@@ -113,6 +134,20 @@ def getLineChartDataHour():
   return ({"label": get_value('HOUR', df),
           "attribute1": get_value('num_delays', df),
           "attribute2": get_value('avg_delay_time', df)})
+
+@app.route("/lineChartData/Country")
+def getLineChartDataCountry():
+  path2 = "Graph_5_State.csv"
+  full_path = os.path.join(file_path, path2)
+  df = pd.read_csv(full_path)
+
+  print({"state": get_value('ORIGIN_STATE_NM', df),
+          "average": get_value('avg_delay_time',df)})
+  
+  return ({"state": get_value('ORIGIN_STATE_NM', df),
+          "average": get_value('avg_delay_time',df)})
+
+
 
 
 @app.route("/barChartData/Elevation")
@@ -233,9 +268,9 @@ def getLineChartDatasixWeatherDigits():
 
     for file_name in file_list:
         full_path = os.path.join(file_path, file_name)
-        print(full_path)
+        # print(full_path)
         df = pd.read_csv(full_path)
-        print(df)
+        # print(df)
         filename_without_extension = file_name.split('.csv')[0]
 
         parts = filename_without_extension.split('_')
