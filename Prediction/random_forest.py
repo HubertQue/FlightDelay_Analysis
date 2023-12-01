@@ -12,7 +12,7 @@ df = pd.read_csv(file_path)
 print("Initial DataFrame shape:", df.shape)
 
 df.loc[df['CANCELLED'] == 1 , 'DEP_DELAY'] = 999
-df.loc[df['CANCELLED'] == 1 , 'DEP_TIME'] = '00:00:00 AM'
+# df.loc[df['CANCELLED'] == 1 , 'DEP_TIME'] = '00:00:00 AM'
 
 # 删除不需要的列
 columns_to_drop = ['YEAR', 'FL_DATE', 'ORIGIN', 'ORIGIN_CITY_NAME', 'ORIGIN_STATE_NM', 'DEST', 'DEST_CITY_NAME', 'DEST_STATE_NM', 'STATION',
@@ -27,7 +27,7 @@ print("DataFrame after dropping NA:", df.shape)
 # 将小时转换为时间
 df['DEP_HOUR'] = df['DEP_TIME'].str[:2]
 df.loc[df['DEP_HOUR'] == '24' , 'DEP_HOUR'] = '00'
-df.loc[df['CANCELLED'] == 1 , 'DEP_HOUR'] = '24'
+# df.loc[df['CANCELLED'] == 1 , 'DEP_HOUR'] = '24'
 df.drop('DEP_TIME', axis=1, inplace=True)
 df.drop('CANCELLED', axis=1, inplace=True)
 df.reset_index(drop=True, inplace=True)
