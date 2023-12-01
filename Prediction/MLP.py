@@ -7,6 +7,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import accuracy_score, classification_report, f1_score, matthews_corrcoef
 from tqdm import tqdm
 import joblib
+import os
 
 # 设置你的CSV文件路径
 file_path = '.\\airport_weather_2020.csv'
@@ -14,7 +15,7 @@ df = pd.read_csv(file_path)
 print("Initial DataFrame shape:", df.shape)
 
 df.loc[df['CANCELLED'] == 1 , 'DEP_DELAY'] = 999
-df.loc[df['CANCELLED'] == 1 , 'DEP_TIME'] = '0:00:00 AM'
+df.loc[df['CANCELLED'] == 1 , 'DEP_TIME'] = '00:00:00 AM'
 
 # 删除不需要的列
 columns_to_drop = ['YEAR', 'FL_DATE', 'ORIGIN', 'ORIGIN_CITY_NAME', 'ORIGIN_STATE_NM', 'DEST', 'DEST_CITY_NAME', 'DEST_STATE_NM', 'STATION',
@@ -28,7 +29,8 @@ print("DataFrame after dropping NA:", df.shape)
 
 # 将小时转换为时间
 df['DEP_HOUR'] = df['DEP_TIME'].str[:2]
-df.loc[df['CANCELLED'] == 1 , 'DEP_HOUR'] = '25'
+df.loc[df['DEP_HOUR'] == '24' , 'DEP_HOUR'] = '00'
+df.loc[df['CANCELLED'] == 1 , 'DEP_HOUR'] = '24'
 df.drop('DEP_TIME', axis=1, inplace=True)
 df.drop('CANCELLED', axis=1, inplace=True)
 df.reset_index(drop=True, inplace=True)
@@ -97,3 +99,11 @@ print("Accuracy:", accuracy)
 print("F1 Score:", f1)
 print(f"Matthews Correlation Coefficient: {mcc}")
 print("\nClassification Report:\n", classification_report(y_test, y_pred))
+
+output_dir = '.'
+encoder_path = os.path.join(output_dir, 'mlp_cls_encoder.joblib')
+scaler_path = os.path.join(output_dir, 'mlp_cls_scaler.joblib')
+model_path = os.path.join(output_dir, 'mlp_cls.joblib')
+joblib.dump(encoder, encoder_path)
+joblib.dump(scaler, scaler_path)
+joblib.dump(mlp, model_path)

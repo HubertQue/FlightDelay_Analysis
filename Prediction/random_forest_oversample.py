@@ -1,12 +1,9 @@
 import pandas as pd
-import numpy as np
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.model_selection import train_test_split
 from imblearn.over_sampling import RandomOverSampler
-from sklearn.neural_network import MLPClassifier
-from sklearn.preprocessing import StandardScaler
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, classification_report, f1_score, matthews_corrcoef
-from tqdm import tqdm
 import joblib
 import os
 
@@ -45,18 +42,6 @@ df = pd.concat([df, encoded_df], axis=1)
 df.drop(columns_to_encode, axis=1, inplace=True)
 
 # 分类延迟时间
-def categorize_delay(delay):
-    if delay < 0:
-        return 0
-    elif 0 <= delay < 10:
-        return 1
-    elif 10 <= delay < 20:
-        return 2
-    elif 20 <= delay < 30:
-        return 3
-    else:
-        return 4
-
 def categorize_delay_biary(delay):
     if delay <= 15:
         return 0
@@ -69,32 +54,16 @@ df['DEP_DELAY_Category'] = df['DEP_DELAY'].apply(categorize_delay_biary)
 X = df.drop(['DEP_DELAY_Category', 'DEP_DELAY'], axis=1)
 y = df['DEP_DELAY_Category']
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
-class_set = np.unique(y)
-
-# 训练模型
-scaler = StandardScaler()
-X_train_scaled = scaler.fit_transform(X_train)
-X_test_scaled = scaler.transform(X_test)
 
 oversampler = RandomOverSampler(random_state=42)
-X_resampled, y_resampled = oversampler.fit_resample(X_train_scaled, y_train)
+X_resampled, y_resampled = oversampler.fit_resample(X_train, y_train)
 
-epochs = 5  # 定义迭代次数
-batch_size = 256  # 批量大小
-hidden_layer_size = (50, 50,)
-learning_rate = 0.001
-shuffle = True
-
-# 创建 MLP 模型
-mlp = MLPClassifier(hidden_layer_sizes=hidden_layer_size, batch_size=batch_size, learning_rate_init=learning_rate, max_iter=1, shuffle=shuffle, verbose=True, warm_start=True, random_state=42)
-
-with tqdm(total=epochs, desc=f'Processing', unit='iteration') as pbar:
-    for epoch in range(epochs):
-        mlp.partial_fit(X_resampled, y_resampled, classes=class_set)
-        pbar.update(1)
+# 训练随机森林模型
+rf_classifier = RandomForestClassifier(n_estimators=50, random_state=42)
+rf_classifier.fit(X_resampled, y_resampled)
 
 # 进行预测
-y_pred = mlp.predict(X_test_scaled)
+y_pred = rf_classifier.predict(X_test)
 
 # 评估模型
 accuracy = accuracy_score(y_test, y_pred)
@@ -107,9 +76,8 @@ print(f"Matthews Correlation Coefficient: {mcc}")
 print("\nClassification Report:\n", classification_report(y_test, y_pred))
 
 output_dir = '.'
-encoder_path = os.path.join(output_dir, 'mlp_os_cls_encoder.joblib')
-scaler_path = os.path.join(output_dir, 'mlp_os_cls_scaler.joblib')
-model_path = os.path.join(output_dir, 'mlp_os_cls.joblib')
-joblib.dump(encoder, encoder_dir)
-joblib.dump(scaler, scaler_dir)
-joblib.dump(mlp, model_dir)
+encoder_path = os.path.join(output_dir, 'rf_os_cls_encoder.joblib')
+# scaler_path = os.path.join(output_dir, 'rf_os_cls_scaler.joblib')
+model_path = os.path.join(output_dir, 'rf_os_cls.joblib')
+joblib.dump(encoder, encoder_path)
+joblib.dump(rf_classifier, model_path)
