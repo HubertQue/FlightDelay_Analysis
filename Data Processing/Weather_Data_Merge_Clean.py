@@ -67,9 +67,9 @@ if __name__ == '__main__':
 
     df_merged = pd.concat(df_list, ignore_index=True)
 
-    required_columns = ['STATION', 'DATE', 'ELEVATION', 'NAME', 'TEMP', 'DEWP', 'VISIB', 'WDSP', 'MXSPD', 'MAX', 'MIN', 'PRCP', 'SNDP', 'FRSHTT']
-    optional_columns = ['LATITUDE', 'LONGITUDE', 'TEMP_ATTRIBUTES', 'DEWP_ATTRIBUTES', 'SLP_ATTRIBUTES', 'STP_ATTRIBUTES', 'VISIB_ATTRIBUTES', 'WDSP_ATTRIBUTES', 'GUST', 'MAX_ATTRIBUTES', 'MIN_ATTRIBUTES', 'PRCP_ATTRIBUTES']
-    excluded_columns = ['SLP', 'STP',]
+    required_columns = ['STATION', 'DATE', 'LATITUDE', 'LONGITUDE', 'ELEVATION', 'NAME', 'TEMP', 'DEWP', 'VISIB', 'WDSP', 'MXSPD', 'MAX', 'MIN', 'PRCP', 'SNDP', 'FRSHTT']
+    excluded_columns = ['TEMP_ATTRIBUTES', 'DEWP_ATTRIBUTES', 'SLP_ATTRIBUTES', 'STP_ATTRIBUTES', 'VISIB_ATTRIBUTES', 'WDSP_ATTRIBUTES', 'GUST', 'MAX_ATTRIBUTES', 'MIN_ATTRIBUTES', 'PRCP_ATTRIBUTES']
+    optional_columns = ['SLP', 'STP',]
 
     #delete the optional_columns
     for i in range(len(optional_columns)):
@@ -91,3 +91,4 @@ if __name__ == '__main__':
     df_merged[['Fog', 'Rain or Drizzle', 'Snow or Ice Pellets', 'Hail','Thunder','Tornado or Funnel Cloud']] = df_merged['FRSHTT'].apply(split_columns)
 
     df_merged.to_csv(output_file, index=False)
+    print(f'Weather data of year {args.year} merged.')
