@@ -20,8 +20,9 @@ def data_processing(df_raw, encoder_path='', scaler_path=None):
 
 def prediction_mlp(df_transformed, model_path=''):
     model_loaded = joblib.load(model_path)
-    y_pred = model_loaded.predict(df_transformed)
-    return y_pred
+    prediction = model_loaded.predict(df_transformed)
+    probability = model_loaded.predict_proba(df_transformed)
+    return (prediction, probability)
 
 
 def main(data_raw, model_type='mlp', encoder_path='', scaler_path=None, model_path=''):
@@ -30,10 +31,11 @@ def main(data_raw, model_type='mlp', encoder_path='', scaler_path=None, model_pa
     if model_type == 'mlp':
         res = prediction_mlp(df_transformed, model_path=model_path)
     elif:
-        res = 0 # todo
+        res = (0, 0) # todo
     return res
 
-
-data_test = {'DAY_OF_WEEK': [3], 'DEP_HOUR': [20], 'ELEVATION': [1200.0], 'TEMP':[], 'DEWP':[], 'VISIB':[], 'WDSP':[], 'MXSPD':[], 'MAX':[], 'MIN':[], 'Fog':[], 'Rain or Drizzle':[], 'Snow or Ice':[], 'Pellets':[], 'Hail':[], 'Thunder':[], 'Tornado or Funnel':[], 'Cloud':[], 'MONTH':[]}
-ans = main(data_test, model_type='mlp', encoder_path='xxx', scaler_path=None, model_path='xxx')
-print(ans)
+if __name__ == '__main__':
+    data_test = {'DAY_OF_WEEK': [3], 'DEP_HOUR': [20], 'LATITUDE': [],'LONGITUDE': [], 'ELEVATION': [1200.0], 'TEMP':[20.0], 'VISIB':[], 'MAX':[], 'MIN':[], 'Fog':[], 'Rain or Drizzle':[], 'Snow or Ice':[], 'Pellets':[], 'Hail':[], 'Thunder':[], 'Tornado or Funnel':[], 'Cloud':[], 'MONTH':[]}
+    prediction, probability = main(data_test, model_type='mlp', encoder_path='xxx', scaler_path=None, model_path='xxx')
+    print('Prediction is:', prediction)
+    print('Probability is:', probability)

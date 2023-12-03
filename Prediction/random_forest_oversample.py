@@ -12,14 +12,23 @@ file_path = '.\\airport_weather_2020.csv'
 df = pd.read_csv(file_path)
 print("Initial DataFrame shape:", df.shape)
 
-df.loc[df['CANCELLED'] == 1 , 'DEP_DELAY'] = 999
-df.loc[df['CANCELLED'] == 1 , 'DEP_TIME'] = '00:00:00 AM'
-
-# 删除不需要的列
-columns_to_drop = ['YEAR', 'FL_DATE', 'ORIGIN', 'ORIGIN_CITY_NAME', 'ORIGIN_STATE_NM', 'DEST', 'DEST_CITY_NAME', 'DEST_STATE_NM', 'STATION',
+# drop columns
+columns_to_drop = ['YEAR', 'FL_DATE', 'ORIGIN', 'ORIGIN_CITY_NAME', 'ORIGIN_STATE_NM', 'DEST', 'DEST_CITY_NAME',
+                   'DEST_STATE_NM', 'STATION',
                    'DATE', 'NAME', 'FRSHTT', 'WBAN_ID', 'CALL_SIGN']
+columns_to_drop_unavailable = ['DEWP', 'WDSP', 'MXSPD', 'PRCP', 'SNDP', ]
 df.drop(columns_to_drop, axis=1, inplace=True)
+df.drop(columns_to_drop_unavailable, axis=1, inplace=True)
 print("DataFrame after dropping columns:", df.shape)
+
+# deal with cancelled flights
+cancelled_count = len(df[df['CANCELLED'] == 1])
+not_cancelled_rows = df[df['CANCELLED'] == 0]
+# random sampling follow the distribution of not_cancelled_rows
+sampled_values = not_cancelled_rows['DEP_TIME'].sample(n=cancelled_count, replace=True, random_state=42).tolist()
+df.loc[df['CANCELLED'] == 1, 'DEP_TIME'] = sampled_values
+df.loc[df['CANCELLED'] == 1, 'DEP_DELAY'] = 999
+df.drop('CANCELLED', axis=1, inplace=True)
 
 # 删除缺失值
 df.dropna(inplace=True)
@@ -27,10 +36,8 @@ print("DataFrame after dropping NA:", df.shape)
 
 # 将小时转换为时间
 df['DEP_HOUR'] = df['DEP_TIME'].str[:2]
-df.loc[df['DEP_HOUR'] == '24' , 'DEP_HOUR'] = '00'
-df.loc[df['CANCELLED'] == 1 , 'DEP_HOUR'] = '24'
+df.loc[df['DEP_HOUR'] == '24', 'DEP_HOUR'] = '00'
 df.drop('DEP_TIME', axis=1, inplace=True)
-df.drop('CANCELLED', axis=1, inplace=True)
 df.reset_index(drop=True, inplace=True)
 
 # 独热编码
@@ -41,13 +48,24 @@ encoded_df = pd.DataFrame(encoded_data, columns=encoder.get_feature_names_out(co
 df = pd.concat([df, encoded_df], axis=1)
 df.drop(columns_to_encode, axis=1, inplace=True)
 
-# 分类延迟时间
+
+def categorize_VISIB(visib):
+    if visib < 4:
+        return 0
+    elif visib <= 10:
+        return 1
+    else:
+        return 2
+
+
 def categorize_delay_biary(delay):
     if delay <= 15:
         return 0
     else:
         return 1
 
+
+df['VISIB'] = df['VISIB'].apply(categorize_VISIB)
 df['DEP_DELAY_Category'] = df['DEP_DELAY'].apply(categorize_delay_biary)
 
 # 划分数据集

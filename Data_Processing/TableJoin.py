@@ -15,7 +15,7 @@ args = parser.parse_args()
 
 df_airport = pd.read_csv(os.path.join(args.airport, 'airport-%s-cleaned.csv' % args.year))
 df_weather = pd.read_csv(os.path.join(args.weather, 'weather_%s.csv' % args.year))
-df_code = pd.read_csv((os.path.join(args.mapping, 'id_mapping.csv'), dtype={'WBAN_ID': str})
+df_code = pd.read_csv(os.path.join(args.mapping, 'id_mapping.csv'), dtype={'WBAN_ID': str})
 
 df_weather['STATION'] = df_weather['STATION'].astype(str).str[-5:]
 weather_code_df = pd.merge(df_weather, df_code, left_on='STATION', right_on='WBAN_ID', how='inner')
@@ -30,11 +30,10 @@ final_df = pd.merge(
     how='inner',
     left_on=['ORIGIN', 'FL_DATE'],
     right_on=['CALL_SIGN', 'DATE'])
-final_df.to_csv('../data/airport_weather_2020.csv', index=False)
+final_df.to_csv(os.path.join(args.output, 'airport_weather_%s.csv' % args.year), index=False)
 
-
-final_df = final_df.dropna()
-pearson_corr = final_df.corr(method='pearson')['DEP_DELAY'].sort_values(ascending=False)
-print(pearson_corr)
-corr = final_df.corr()['DEP_DELAY'].sort_values(ascending=False)
-print(corr)
+#final_df = final_df.dropna()
+#pearson_corr = final_df.corr(method='pearson')['DEP_DELAY'].sort_values(ascending=False)
+#print(pearson_corr)
+#corr = final_df.corr()['DEP_DELAY'].sort_values(ascending=False)
+#print(corr)
