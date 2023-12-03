@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request, jsonify
 from flask_cors import CORS
 import os
 import csv
@@ -259,13 +259,39 @@ def getLineChartDatasixWeatherDigits():
         })
 
 
-
-
 @app.route("/pieChartData")
 def getPieChartData():
   return {"label":['January', 'February', 'March', 'April', 'May'],
           "attribute":[12, 19, 3, 5, 2, 13],
           "colors":['red', 'orange', 'yellow', 'green', 'blue', 'purple']}
+
+
+@app.route("/weatherform", methods=['POST'])
+def getWeatherData():
+    # 获取 JSON 数据
+    data = request.json
+    date = data.get('date')
+    city = data.get('city')
+    AveT = data.get('AveT')
+    MaxT = data.get('MaxT')
+    MinT = data.get('MinT')
+    visibility = data.get('visibility')
+    weatherCondition = data.get('weatherCondition')
+
+    
+
+    result = {
+        "date": date,
+        "city": city,
+        "AveT": AveT,
+        "MaxT": MaxT,
+        "MinT": MinT,
+        "visibility": visibility,
+        "weatherCondition": weatherCondition
+    }
+    print(result)
+
+    return jsonify(result) 
 
 
 if __name__ == "__main__":
