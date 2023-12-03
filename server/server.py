@@ -10,28 +10,18 @@ def get_value(string_name, df):
 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
+# CORS(app, resources={r"/*": {"origins": "http://52.9.248.230:3000"}})
 
 
-file_path = "../Data Analyzing/CSV Files/"
+# file_path = "../cmpt732_client/CSV Files/"
+file_path = "../Data_Analyzing/CSV Files/"
 
-'''path2 = "Graph_4_Hour.csv"
-full_path = os.path.join(file_path, path2)
-df = pd.read_csv(full_path)
-
-print(df)
-
-print(({"label": get_value('HOUR', df),
-          "attribute1": get_value('num_delays', df),
-          "attribute2": get_value('avg_delay_time', df)}))'''
 
 path2 = "Graph_2_Month.csv"
 full_path = os.path.join(file_path, path2)
 df = pd.read_csv(full_path)
 df = df.drop(df.index[0])
 
-# print({"label": get_value('MONTH', df),
-#           "data": get_value('avg_delay_time', df),
-#           })
 
 df = pd.read_csv(os.path.join(file_path, "Graph_5_State.csv"))
 
@@ -47,9 +37,6 @@ result_list2 = []
 for d in result_list:
     for key, value in d.items():
         result_list2.append({'key': key, 'value': value})
-
-
-print(result_list2)
 
 
 label_list = []
@@ -69,23 +56,15 @@ for file_name in file_list:
       data_list.append(get_value('avg_delay_time', df))
       flattened_list = [item for sublist in data_list for item in sublist]
 
-      #print(label_list)
-      #print(flattened_list)
+@app.route('/')
+def hello_world():
+	return 'Hello &^&***)(())'
 
-
-
-    # 假设 'SNDP' 和 'avg_delay_time' 是在最后一个文件中
-    # 读取最后一个文件
-    #last_file_path = os.path.join(file_path, "Graph_19_SNDP.csv")
-    #df_last = pd.read_csv(last_file_path)
-
-# print ({
-#         "label": label_list,
-#        "data": flattened_list,
-#     })
-
-
-
+@app.route("/dataCheck")
+def getData():
+  return ({"label": "a",
+          "attribute1": "b",
+          "attribute2":  "c"})
 
 
 @app.route("/lineChartData/Year")
@@ -99,6 +78,7 @@ def getLineChartDataYear():
           "attribute2": get_value('avg_delay_time', df)})
 
 
+
 @app.route("/lineChartData/Month")
 def getLineChartDataMonth():
   path2 = "Graph_2_Month.csv"
@@ -108,8 +88,6 @@ def getLineChartDataMonth():
   return ({"label": get_value('MONTH', df),
           "attribute1": get_value('num_delays', df),
           "attribute2": get_value('avg_delay_time', df)})
-
-
 
 
 @app.route("/lineChartData/Week")
@@ -141,13 +119,9 @@ def getLineChartDataCountry():
   full_path = os.path.join(file_path, path2)
   df = pd.read_csv(full_path)
 
-  print({"state": get_value('ORIGIN_STATE_NM', df),
-          "average": get_value('avg_delay_time',df)})
   
   return ({"state": get_value('ORIGIN_STATE_NM', df),
           "average": get_value('avg_delay_time',df)})
-
-
 
 
 @app.route("/barChartData/Elevation")
@@ -278,18 +252,11 @@ def getLineChartDatasixWeatherDigits():
         label_list.append(parts[-1] + '1')
         data_list.append(get_value('avg_delay_time', df))
         flattened_list = [item for sublist in data_list for item in sublist]
-
-
   
     return({
         "label": label_list,
        "data": flattened_list,
         })
-
-
-
-
-
 
 
 
