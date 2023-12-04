@@ -53,7 +53,7 @@ def json_to_row(data_json):
             latitude = airport_mapping[airport_id]['LATITUDE']
             longitude = airport_mapping[airport_id]['LONGITUDE']
             elevation = airport_mapping[airport_id]['ELEVATION']
-        else
+        else:
             return (None, None, None)
         return (latitude, longitude, elevation)
 
