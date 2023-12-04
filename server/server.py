@@ -300,7 +300,7 @@ def getWeatherData():
     print(probability)
 
 
-    return jsonify(result) 
+    return prediction
 
 
 if __name__ == "__main__":

@@ -21,7 +21,7 @@ CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
 file_path = "../Data_Analyzing/CSV Files/"
 
 
-path2 = "Graph_2_Month.csv"
+path2 = "Graph_2_Month_2020.csv"
 full_path = os.path.join(file_path, path2)
 df = pd.read_csv(full_path)
 df = df.drop(df.index[0])
@@ -45,7 +45,7 @@ for d in result_list:
 
 label_list = []
 data_list = []
-file_list = ["Graph_20_Fog.csv", "Graph_21_Rain_Drizzle.csv", "Graph_22_Snow_Ice Pellets.csv", "Graph_23_Hail.csv", "Graph_24_Thunder.csv", "Graph_25_Tornado_FunnelCloud.csv"]
+file_list = ["Graph_20_Fog.csv", "Graph_21_Rain_Drizzle.csv", "Graph_22_Snow_Ice_Pellets.csv", "Graph_23_Hail.csv", "Graph_24_Thunder.csv", "Graph_25_Tornado_Funnel_Cloud.csv"]
 
 for file_name in file_list:
       full_path = os.path.join(file_path, file_name)
@@ -73,7 +73,7 @@ def getData():
 
 @app.route("/lineChartData/Year")
 def getLineChartDataYear():
-  path2 = "Graph_1_Year.csv"
+  path2 = "Graph_1_Year_2020.csv"
   full_path = os.path.join(file_path, path2)
   df = pd.read_csv(full_path)
   
@@ -85,7 +85,7 @@ def getLineChartDataYear():
 
 @app.route("/lineChartData/Month")
 def getLineChartDataMonth():
-  path2 = "Graph_2_Month.csv"
+  path2 = "Graph_2_Month_2020.csv"
   full_path = os.path.join(file_path, path2)
   df = pd.read_csv(full_path)
   
@@ -96,7 +96,7 @@ def getLineChartDataMonth():
 
 @app.route("/lineChartData/Week")
 def getLineChartDataWeek():
-  path2 = "Graph_3_Weekday.csv"
+  path2 = "Graph_3_Weekday_2020.csv"
   full_path = os.path.join(file_path, path2)
   df = pd.read_csv(full_path)
   
@@ -107,7 +107,7 @@ def getLineChartDataWeek():
 
 @app.route("/lineChartData/Hour")
 def getLineChartDataHour():
-  path2 = "Graph_4_Hour.csv"
+  path2 = "Graph_4_Hour_2020.csv"
   full_path = os.path.join(file_path, path2)
   df = pd.read_csv(full_path)
   df = df.drop(df.index[0])
@@ -242,7 +242,7 @@ def getLineChartDataSNDP():
 def getLineChartDatasixWeatherDigits():
     label_list = []
     data_list = []
-    file_list = ["Graph_20_Fog.csv", "Graph_21_Rain_Drizzle.csv", "Graph_22_Snow_Ice Pellets.csv", "Graph_23_Hail.csv", "Graph_24_Thunder.csv", "Graph_25_Tornado_FunnelCloud.csv"]
+    file_list = ["Graph_20_Fog.csv", "Graph_21_Rain_Drizzle.csv", "Graph_22_Snow_Ice_Pellets.csv", "Graph_23_Hail.csv", "Graph_24_Thunder.csv", "Graph_25_Tornado_Funnel_Cloud.csv"]
 
     for file_name in file_list:
         full_path = os.path.join(file_path, file_name)

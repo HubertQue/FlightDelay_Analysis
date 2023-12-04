@@ -42,7 +42,6 @@ function WeatherForm() {
 
 
     const data = { date, hour, airport, AveT, MaxT, MinT, visibility, weatherConditions };
-    console.log("data is: ", data)
     try {
       // 发送 POST 请求到后端
       const response = await fetch('http://localhost:5000/weatherform', {

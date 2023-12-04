@@ -63,7 +63,7 @@ def json_to_row(data_json):
     if latitude is None:
         return (None, False)
 
-    visib = float(data_json['visibility'])
+    visib = data_json['visibility']
     weatherConditions = data_json['weatherConditions']
 
     def get_visibility(data):
@@ -83,6 +83,7 @@ def json_to_row(data_json):
 
 def predict_delay(data_jsno={}):
     (data_test, flag) = json_to_row(data_json)
+    flag = True
     if flag:
         prediction, probability = evaluate_model(data_test, model_type='mlp',
                                                  encoder_path='models\\mlp_os_cls_encoder.joblib',
@@ -97,8 +98,11 @@ def predict_delay(data_jsno={}):
 
 
 if __name__ == '__main__':
-    data_json = {}
-    data_test = json_to_row(data_json)
+    data_test = {'DAY_OF_WEEK': [3], 'DEP_HOUR': ['03'], 'MONTH': [10], 'LATITUDE': [33.3], 'LONGITUDE': [-144.4],
+                       'ELEVATION': [4.5], 'TEMP': [15.0], 'VISIB': [1], 'MAX': [20.0], 'MIN': [10.0], 'Fog': [0],
+                       'Rain or Drizzle': [0], 'Snow or Ice Pellets': [0], 'Hail': [0], 'Thunder': [0],
+                       'Tornado or Funnel Cloud': [0]}
+    # data_test = json_to_row(data_json)
     prediction, probability = evaluate_model(data_test, model_type='mlp', encoder_path='models\\mlp_os_cls_encoder.joblib', scaler_path='models\\mlp_os_cls_scaler.joblib', model_path='models\\mlp_os_cls.joblib')
     print('Prediction is:', prediction)
     print('Probability is:', probability)
