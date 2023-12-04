@@ -294,12 +294,8 @@ def getWeatherData():
     }
     print("result is: " , result)
     prediction, probability = Predict.predict_delay(result)
-    print(prediction)
-    print(probability)
 
-
-    return jsonify(result) 
-
+    return str(prediction)
 
 if __name__ == "__main__":
   app.run(debug=True)
