@@ -1,6 +1,7 @@
+from ..Prediction import Predict
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from ..Prediction import Predict
+
 
 import os
 import csv
