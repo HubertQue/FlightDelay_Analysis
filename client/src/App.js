@@ -19,7 +19,7 @@ function App() {
         <Navbar />
         
         <Routes>
-          <Route path="/HomePage" element={<HomePage />} />
+          <Route path="/" element={<HomePage />} />
           <Route path="/DataAnalysis" element={<DataAnalysis />} />
           <Route path="/TrainingModels" element={<TrainingModels />} />
           <Route path="/WeatherForm" element={<WeatherForm />} />

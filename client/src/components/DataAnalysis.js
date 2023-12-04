@@ -58,7 +58,43 @@ const SecondaryNavbar = ({ filters, onFilterSelected, selectedFilter }) => {
   if (!filters) {
     return null;
   }
-  
+
+
+  function switchFilter(filter) {
+    switch (filter) {
+      case 'Year':
+        return 'Year';
+      case 'Month':
+        return 'Month';
+      case 'Week':
+        return 'Week';
+      case 'Hour':
+        return 'Hour';
+      case 'Country':
+        return 'Country';
+      case 'City':
+        return 'City';
+      case 'Elevation':
+        return 'Elevation';
+      case 'Temperature':
+        return 'Temperature';
+      case 'DEWP':
+        return 'Dew point';
+      case 'VISIBILITY':
+        return 'VISIBILITY';
+      case 'WDSP':
+        return 'Wind speed';
+      case 'PRCP':
+        return 'Precipitation ';
+      case 'SNDP':
+        return 'Snow depth';
+      case 'FRSHTT':
+        return 'Weather Condition';
+      default:
+        return "default"
+    }
+  }
+
   return (
     <div className="secondary-navbar" >
       {filters.map((filter) => (
@@ -73,7 +109,7 @@ const SecondaryNavbar = ({ filters, onFilterSelected, selectedFilter }) => {
             backgroundColor: selectedFilter === filter ? 'white' : 'transparent' // 选中的按钮背景为白色
           }}
         >
-          {filter}
+          {switchFilter(filter)}
         </Button>
       ))}
     </div>
@@ -106,13 +142,13 @@ const Content = ({ selectedItem, secondaryFilter}) => {
       case "VISIB": 
         return ;
       case "WDSP": 
-        return <BarChart props="WDSP"/>;
+        return <BarChart props="WDSP"/>;  
       case "PRCP": 
         return <BarChart props="PRCP"/>;
       case "SNDP": 
         return <BarChart props="SNDP"/>;
       case "FRSHTT": 
-        return ;
+        return <BarChart props="FRSHTT"/>;;
       default:
         return <div>Click Tag</div>
     }
@@ -134,7 +170,7 @@ const DataAnalysis = () => {
   const allFiltersMap = {
     'time': ['Year', 'Month', 'Week', 'Hour'],
     'geography': ['Country', 'City'],
-    'weather': ['Elevation', 'Temperature', 'DEWP', 'visibility', ' WDSP', 'PRCP','SNDP', 'FRSHTT']
+    'weather': ['Elevation', 'Temperature', 'DEWP', 'VISIBILITY', 'WDSP', 'PRCP','SNDP', 'FRSHTT']
   };
 
   useEffect(() => {

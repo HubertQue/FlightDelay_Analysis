@@ -17,7 +17,7 @@ function LineChart({props}) {
     labels: data['label'],
     datasets: [
       {
-        label: 'Attribute 2',
+        label: props,
         data: data['attribute2'],
         fill: false,
         borderColor: 'rgb(75, 192, 192)',

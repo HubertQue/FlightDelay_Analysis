@@ -25,7 +25,7 @@ function BarChart({ props }) { // 假设你传递的是一个endpoint参数
     labels: chartData['label'], 
     datasets: [
       {
-        label: 'Dataset 1',
+        label: props,
         data: chartData['data'], 
         backgroundColor: 'rgba(255, 99, 132, 0.5)',
         borderColor: 'rgba(255, 99, 132, 1)',
@@ -34,9 +34,32 @@ function BarChart({ props }) { // 假设你传递的是一个endpoint参数
     ]
   };
 
+  const data2 = {
+    labels: chartData['label'], 
+    datasets: [
+      {
+        label: 'Without',
+        data: chartData['data'], 
+        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+        borderColor: 'rgba(255, 99, 132, 1)',
+        borderWidth: 1,
+      },
+      {
+        label: 'With',
+        data: chartData['data1'], 
+        backgroundColor: 'rgba(54, 162, 235, 0.5)',
+        borderColor: 'rgba(54, 162, 235, 1)',
+        borderWidth: 1,
+      }
+    ]
+  };
+
+  const inputData = props === 'FRSHTT' ? data2 : data;
+
   return (
+
     <div>
-      <Bar data={data} options={options} />
+      <Bar data={inputData} options={options} />
     </div>
   );
 }
