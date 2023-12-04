@@ -1,0 +1,13 @@
+MONTH,num_delays,avg_delay_time
+January,58869,39.50
+February,68393,40.54
+March,91581,31.96
+April,98646,32.94
+May,133662,34.24
+June,213123,43.29
+July,238237,43.84
+August,213952,43.34
+September,146514,35.38
+October,190639,37.14
+November,176414,31.79
+December,213077,38.57

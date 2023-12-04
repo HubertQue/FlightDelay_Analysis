@@ -1,105 +1,108 @@
 VISIB_CATEGORY,ORIGIN_STATE_NM,num_delays,avg_delay_time
-High_VISIB,Pennsylvania,47,48.72
+High_VISIB,Pennsylvania,363,44.10
 High_VISIB,Texas,4,61.00
+High_VISIB,Mississippi,3,158.33
 High_VISIB,Washington,2,61.00
+High_VISIB,Wyoming,2,218.50
 High_VISIB,New York,1,67.00
 High_VISIB,California,1,2.00
-Low_VISIB,Georgia,2290,30.08
-Low_VISIB,Illinois,2005,77.03
-Low_VISIB,Texas,1985,39.75
-Low_VISIB,Michigan,1656,51.63
-Low_VISIB,California,1334,41.18
-Low_VISIB,New York,770,68.51
-Low_VISIB,Washington,730,32.17
-Low_VISIB,Pennsylvania,462,71.78
-Low_VISIB,Maryland,454,36.99
-Low_VISIB,Ohio,450,63.30
-Low_VISIB,Massachusetts,411,68.65
-Low_VISIB,New Jersey,356,50.26
-Low_VISIB,Oregon,283,59.66
-Low_VISIB,Kentucky,250,52.28
-Low_VISIB,Wisconsin,240,47.28
-Low_VISIB,Minnesota,192,48.09
-Low_VISIB,Iowa,184,62.90
-Low_VISIB,Alaska,173,38.70
-Low_VISIB,Indiana,168,54.57
-Low_VISIB,Virginia,164,79.31
-Low_VISIB,Missouri,156,50.53
-Low_VISIB,Louisiana,124,73.52
-Low_VISIB,Tennessee,117,63.34
-Low_VISIB,Idaho,113,55.37
-Low_VISIB,Colorado,91,125.64
-Low_VISIB,Montana,91,86.42
-Low_VISIB,North Carolina,88,66.45
-Low_VISIB,Nebraska,78,59.95
-Low_VISIB,Florida,73,81.62
-Low_VISIB,Connecticut,73,41.36
-Low_VISIB,South Dakota,52,131.88
-Low_VISIB,North Dakota,45,145.82
-Low_VISIB,Arkansas,44,40.30
-Low_VISIB,South Carolina,33,49.09
-Low_VISIB,Maine,31,77.19
-Low_VISIB,Oklahoma,29,71.69
-Low_VISIB,New Mexico,23,22.61
-Low_VISIB,Mississippi,22,79.09
-Low_VISIB,New Hampshire,22,51.73
-Low_VISIB,Rhode Island,22,33.68
-Low_VISIB,West Virginia,17,71.29
-Low_VISIB,Vermont,8,47.88
-Low_VISIB,Nevada,8,11.25
-Low_VISIB,Utah,5,54.00
-Low_VISIB,Wyoming,4,437.25
+Low_VISIB,California,8137,46.58
+Low_VISIB,Georgia,5743,32.67
+Low_VISIB,Illinois,4832,74.49
+Low_VISIB,Washington,4628,39.27
+Low_VISIB,New York,4540,73.08
+Low_VISIB,Texas,4186,43.94
+Low_VISIB,Michigan,3423,56.98
+Low_VISIB,Massachusetts,2200,60.43
+Low_VISIB,North Carolina,1807,46.02
+Low_VISIB,Pennsylvania,1397,66.29
+Low_VISIB,New Jersey,1392,57.29
+Low_VISIB,Maryland,1285,36.34
+Low_VISIB,Ohio,1031,70.96
+Low_VISIB,Missouri,847,37.71
+Low_VISIB,Oregon,823,58.97
+Low_VISIB,Alaska,802,43.77
+Low_VISIB,Tennessee,697,56.91
+Low_VISIB,Utah,693,36.68
+Low_VISIB,Florida,683,48.56
+Low_VISIB,Minnesota,673,54.47
+Low_VISIB,Kentucky,597,71.08
+Low_VISIB,Virginia,546,63.61
+Low_VISIB,Wisconsin,486,62.35
+Low_VISIB,Indiana,442,80.15
+Low_VISIB,Idaho,436,61.40
+Low_VISIB,Iowa,401,81.46
+Low_VISIB,Montana,378,99.13
+Low_VISIB,Nevada,323,53.19
+Low_VISIB,Louisiana,312,61.29
+Low_VISIB,Colorado,312,90.17
+Low_VISIB,North Dakota,296,144.88
+Low_VISIB,Connecticut,289,44.75
+Low_VISIB,South Dakota,239,107.72
+Low_VISIB,Maine,226,60.34
+Low_VISIB,Arkansas,156,58.70
+Low_VISIB,Rhode Island,128,48.02
+Low_VISIB,South Carolina,125,67.39
+Low_VISIB,Nebraska,107,64.31
+Low_VISIB,Oklahoma,83,45.64
+Low_VISIB,New Hampshire,66,50.79
+Low_VISIB,West Virginia,60,124.53
+Low_VISIB,New Mexico,54,97.50
+Low_VISIB,Vermont,40,86.08
+Low_VISIB,Kansas,40,115.17
+Low_VISIB,Wyoming,38,196.32
+Low_VISIB,Mississippi,33,61.03
+Low_VISIB,Alabama,25,56.68
+Low_VISIB,Arizona,16,58.31
 Low_VISIB,Puerto Rico,4,35.00
-Low_VISIB,Arizona,3,25.33
-Low_VISIB,Kansas,1,139.00
-Medium_VISIB,Texas,98568,33.29
-Medium_VISIB,California,80132,31.80
-Medium_VISIB,Florida,67357,34.22
-Medium_VISIB,Illinois,54377,32.63
-Medium_VISIB,Georgia,47955,29.01
-Medium_VISIB,North Carolina,46542,36.16
-Medium_VISIB,Washington,31342,26.78
-Medium_VISIB,Arizona,26732,28.36
-Medium_VISIB,Nevada,26488,26.67
-Medium_VISIB,New York,26208,41.53
-Medium_VISIB,Virginia,25830,46.84
-Medium_VISIB,Michigan,21208,39.85
-Medium_VISIB,Utah,18979,30.88
-Medium_VISIB,Pennsylvania,18449,43.83
-Medium_VISIB,Maryland,17043,22.71
-Medium_VISIB,Tennessee,16914,34.33
-Medium_VISIB,New Jersey,16857,40.02
-Medium_VISIB,Minnesota,15563,36.85
-Medium_VISIB,Missouri,15297,33.19
-Medium_VISIB,Massachusetts,11689,34.19
-Medium_VISIB,Hawaii,11560,26.69
-Medium_VISIB,Oregon,10339,33.62
-Medium_VISIB,Ohio,10193,42.79
-Medium_VISIB,Louisiana,9309,39.70
-Medium_VISIB,Kentucky,7898,46.58
-Medium_VISIB,Indiana,6960,41.58
-Medium_VISIB,Wisconsin,5909,49.49
-Medium_VISIB,South Carolina,5181,48.35
-Medium_VISIB,Puerto Rico,4305,39.84
-Medium_VISIB,Oklahoma,4201,43.73
-Medium_VISIB,Alaska,4135,29.63
-Medium_VISIB,Montana,3628,49.66
-Medium_VISIB,Colorado,3561,75.11
-Medium_VISIB,Alabama,3546,48.22
-Medium_VISIB,Idaho,3195,48.41
-Medium_VISIB,Iowa,3067,51.84
-Medium_VISIB,Arkansas,2989,47.97
-Medium_VISIB,Nebraska,2797,50.28
-Medium_VISIB,New Mexico,2593,41.56
-Medium_VISIB,Connecticut,2370,43.85
-Medium_VISIB,North Dakota,2255,67.60
-Medium_VISIB,South Dakota,1823,57.30
-Medium_VISIB,Rhode Island,1607,40.85
-Medium_VISIB,Mississippi,1591,51.78
-Medium_VISIB,Maine,1504,59.28
-Medium_VISIB,Kansas,1449,57.95
-Medium_VISIB,West Virginia,885,62.46
-Medium_VISIB,Vermont,748,66.49
-Medium_VISIB,New Hampshire,722,49.61
-Medium_VISIB,Wyoming,686,78.33
-Medium_VISIB,U.S. Pacific Trust Territories and Possessions,81,49.09
+Medium_VISIB,Texas,595591,39.36
+Medium_VISIB,California,542377,33.05
+Medium_VISIB,Florida,471511,40.94
+Medium_VISIB,Illinois,335754,37.96
+Medium_VISIB,Georgia,277671,31.58
+Medium_VISIB,North Carolina,222369,39.29
+Medium_VISIB,New York,219470,47.54
+Medium_VISIB,Nevada,188295,33.66
+Medium_VISIB,Virginia,177472,45.95
+Medium_VISIB,Arizona,171039,33.85
+Medium_VISIB,Washington,166614,28.35
+Medium_VISIB,New Jersey,121271,44.58
+Medium_VISIB,Michigan,109629,42.45
+Medium_VISIB,Tennessee,108212,37.60
+Medium_VISIB,Maryland,106443,30.26
+Medium_VISIB,Pennsylvania,100717,45.87
+Medium_VISIB,Hawaii,97936,25.45
+Medium_VISIB,Utah,94992,33.24
+Medium_VISIB,Missouri,93890,36.92
+Medium_VISIB,Massachusetts,85186,41.07
+Medium_VISIB,Minnesota,84929,39.64
+Medium_VISIB,Ohio,59865,44.01
+Medium_VISIB,Oregon,56534,35.64
+Medium_VISIB,Louisiana,53112,41.68
+Medium_VISIB,Kentucky,47573,44.73
+Medium_VISIB,Indiana,39116,41.89
+Medium_VISIB,Wisconsin,33435,48.31
+Medium_VISIB,South Carolina,31495,44.87
+Medium_VISIB,Puerto Rico,26703,47.92
+Medium_VISIB,Oklahoma,24654,46.16
+Medium_VISIB,Alaska,23436,32.03
+Medium_VISIB,Montana,20171,48.75
+Medium_VISIB,Alabama,19693,47.11
+Medium_VISIB,Idaho,19008,45.31
+Medium_VISIB,New Mexico,17991,43.27
+Medium_VISIB,Nebraska,17765,46.17
+Medium_VISIB,Arkansas,17434,48.05
+Medium_VISIB,Colorado,16955,72.93
+Medium_VISIB,Connecticut,16762,43.26
+Medium_VISIB,Iowa,15978,52.41
+Medium_VISIB,Maine,11310,53.26
+Medium_VISIB,North Dakota,11154,66.31
+Medium_VISIB,Rhode Island,10944,43.30
+Medium_VISIB,South Dakota,9429,57.96
+Medium_VISIB,Mississippi,8616,50.96
+Medium_VISIB,Kansas,7521,55.54
+Medium_VISIB,Vermont,4837,61.60
+Medium_VISIB,New Hampshire,4515,44.55
+Medium_VISIB,West Virginia,4161,58.58
+Medium_VISIB,Wyoming,2996,76.74
+Medium_VISIB,U.S. Pacific Trust Territories and Possessions,382,34.66
