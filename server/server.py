@@ -1,8 +1,11 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+from ..Prediction import Predict
+
 import os
 import csv
 import pandas as pd
+
 
 
 def get_value(string_name, df):
@@ -234,7 +237,7 @@ def getLineChartDataSNDP():
 
 # This bar combines 6 different weather conditions
 
-@app.route("/barChartData/sixWeatherDigits")
+@app.route("/barChartData/FRSHTT")
 def getLineChartDatasixWeatherDigits():
     label_list = []
     data_list = []
@@ -253,17 +256,16 @@ def getLineChartDatasixWeatherDigits():
         data_list.append(get_value('avg_delay_time', df))
         flattened_list = [item for sublist in data_list for item in sublist]
   
+        unique_labels = list(set(label[:-1] for label in label_list))
+        data1 = [flattened_list[i] for i in range(len(flattened_list)) if label_list[i].endswith('0')]
+        data2 = [flattened_list[i] for i in range(len(flattened_list)) if label_list[i].endswith('1')]
+
+
     return({
-        "label": label_list,
-       "data": flattened_list,
+        "label": unique_labels,
+        "data": data1,
+        "data1": data2,
         })
-
-
-@app.route("/pieChartData")
-def getPieChartData():
-  return {"label":['January', 'February', 'March', 'April', 'May'],
-          "attribute":[12, 19, 3, 5, 2, 13],
-          "colors":['red', 'orange', 'yellow', 'green', 'blue', 'purple']}
 
 
 @app.route("/weatherform", methods=['POST'])
@@ -271,25 +273,31 @@ def getWeatherData():
     # 获取 JSON 数据
     data = request.json
     date = data.get('date')
-    city = data.get('city')
+    hour = data.get('hour')
+    airport = data.get('airport')
     AveT = data.get('AveT')
     MaxT = data.get('MaxT')
     MinT = data.get('MinT')
     visibility = data.get('visibility')
-    weatherCondition = data.get('weatherCondition')
+    weatherConditions = data.get('weatherConditions')
 
     
 
     result = {
         "date": date,
-        "city": city,
+        "hour": hour,
+        "airport": airport,
         "AveT": AveT,
         "MaxT": MaxT,
         "MinT": MinT,
         "visibility": visibility,
-        "weatherCondition": weatherCondition
+        "weatherConditions": weatherConditions
     }
     print(result)
+    prediction, probability = Predict.predict_delay(result)
+    print(prediction)
+    print(probability)
+
 
     return jsonify(result) 
 
