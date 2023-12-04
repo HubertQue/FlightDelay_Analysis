@@ -17,13 +17,13 @@ function LineChart({props}) {
     labels: data['label'],
     datasets: [
       {
-        label: props,
+        label: props + ` (X-axis: ${props}, Y-axis: Average Delay time)`,
         data: data['attribute2'],
         fill: false,
         borderColor: 'rgb(75, 192, 192)',
         tension: 0.1  
       }
-    ]
+    ],
   };
 
   return(

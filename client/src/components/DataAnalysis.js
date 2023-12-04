@@ -116,9 +116,8 @@ const SecondaryNavbar = ({ filters, onFilterSelected, selectedFilter }) => {
   );
 };
 
-
-
-const Content = ({ selectedItem, secondaryFilter}) => {
+const Content = ({ selectedItem, secondaryFilter}) => { 
+  console.log(secondaryFilter)
   const renderChart = () => {
     switch(secondaryFilter) {
       case "Year": 
@@ -150,7 +149,7 @@ const Content = ({ selectedItem, secondaryFilter}) => {
       case "FRSHTT": 
         return <BarChart props="FRSHTT"/>;;
       default:
-        return <div>Click Tag</div>
+        return <div>Please Click the Top Tag</div>
     }
   }
 
@@ -187,7 +186,11 @@ const DataAnalysis = () => {
     <div className="app-container">
       <Sidebar onItemSelected={(item) => {
         setSelectedItem(item);
-        setSecondaryFilter(''); 
+        if (item !== selectedItem) {
+          // 只有当选择的项目改变时才更新 secondaryFilter
+          const firstFilter = allFiltersMap[item] && allFiltersMap[item][0];
+          setSecondaryFilter(firstFilter || ''); 
+        }
       }} />
       <div className="content-container">
         <SecondaryNavbar filters={allFilters} onFilterSelected={(filter) => setSecondaryFilter(filter)} />
