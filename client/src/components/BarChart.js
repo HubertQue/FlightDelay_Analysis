@@ -10,7 +10,7 @@ function BarChart({ props }) { // 假设你传递的是一个endpoint参数
     fetch(`http://localhost:5000/barChartData/${props}`)
       .then(response => response.json())
       .then(data => setChartData(data))
-      .catch(error => console.error('Error fetching data: ', error));
+      .catch(error => console.error('Error fetch data: ', error));
   }, [props]);
 
   const options = {
