@@ -13,12 +13,13 @@ def get_value(string_name, df):
    return ([value for value in df[string_name]])
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
-# CORS(app, resources={r"/*": {"origins": "http://52.9.248.230:3000"}})
+CORS(app, resources={r"/*": {"origins": "http://52.9.248.230:3000"}})
+# CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
 
 
-# file_path = "../cmpt732_client/CSV Files/"
-file_path = "../Data_Analyzing/CSV Files/"
+
+file_path = "../cmpt732_client/CSV Files/"
+# file_path = "../Data_Analyzing/CSV Files/"
 
 
 path2 = "Graph_2_Month_2020.csv"
@@ -62,7 +63,7 @@ for file_name in file_list:
 
 @app.route('/')
 def hello_world():
-	return 'Hello &^&***)(())'
+	return 'Check 123'
 
 @app.route("/dataCheck")
 def getData():
@@ -73,12 +74,11 @@ def getData():
 
 @app.route("/lineChartData/Year")
 def getLineChartDataYear():
-  path2 = "Graph_1_Year_2020.csv"
+  path2 = "Graph_1_Year.csv"
   full_path = os.path.join(file_path, path2)
   df = pd.read_csv(full_path)
   
   return ({"label": get_value('YEAR', df),
-          "attribute1": get_value('num_delays', df),
           "attribute2": get_value('avg_delay_time', df)})
 
 
@@ -86,36 +86,59 @@ def getLineChartDataYear():
 @app.route("/lineChartData/Month")
 def getLineChartDataMonth():
   path2 = "Graph_2_Month_2020.csv"
+  path3 = "Graph_2_Month_2021.csv"
+  path4 = "Graph_2_Month_2022.csv"
   full_path = os.path.join(file_path, path2)
   df = pd.read_csv(full_path)
+  full_path3 = os.path.join(file_path, path3)
+  df3 = pd.read_csv(full_path3)
+  full_path4 = os.path.join(file_path, path4)
+  df4 = pd.read_csv(full_path4)
   
   return ({"label": get_value('MONTH', df),
-          "attribute1": get_value('num_delays', df),
-          "attribute2": get_value('avg_delay_time', df)})
+          "attribute2": get_value('avg_delay_time', df),
+          "attribute3": get_value('avg_delay_time', df3),
+          "attribute4": get_value('avg_delay_time', df4)})
 
 
 @app.route("/lineChartData/Week")
 def getLineChartDataWeek():
   path2 = "Graph_3_Weekday_2020.csv"
+  path3 = "Graph_3_Weekday_2021.csv"
+  path4 = "Graph_3_Weekday_2022.csv"
   full_path = os.path.join(file_path, path2)
+  full_path3 = os.path.join(file_path, path3)
+  full_path4 = os.path.join(file_path, path4)
   df = pd.read_csv(full_path)
+  df3 = pd.read_csv(full_path3)
+  df4 = pd.read_csv(full_path4)
   
   return ({"label": get_value('DAY_OF_WEEK', df),
-          "attribute1": get_value('num_delays', df),
-          "attribute2": get_value('avg_delay_time', df)})
+          "attribute2": get_value('avg_delay_time', df),
+          "attribute3": get_value('avg_delay_time', df3),
+          "attribute4": get_value('avg_delay_time', df4)})
 
 
 @app.route("/lineChartData/Hour")
 def getLineChartDataHour():
   path2 = "Graph_4_Hour_2020.csv"
+  path3 = "Graph_4_Hour_2021.csv"
+  path4 = "Graph_4_Hour_2022.csv"
   full_path = os.path.join(file_path, path2)
+  full_path3 = os.path.join(file_path, path3)
+  full_path4 = os.path.join(file_path, path4)
   df = pd.read_csv(full_path)
+  df3 = pd.read_csv(full_path3)
+  df4 = pd.read_csv(full_path4)
   df = df.drop(df.index[0])
+  df3 = df3.drop(df3.index[0])
+  df4 = df4.drop(df4.index[0])
 
   
   return ({"label": get_value('HOUR', df),
-          "attribute1": get_value('num_delays', df),
-          "attribute2": get_value('avg_delay_time', df)})
+          "attribute2": get_value('avg_delay_time', df),
+          "attribute3": get_value('avg_delay_time', df3),
+          "attribute4": get_value('avg_delay_time', df4)})
 
 @app.route("/lineChartData/Country")
 def getLineChartDataCountry():

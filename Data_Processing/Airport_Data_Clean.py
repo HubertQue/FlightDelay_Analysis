@@ -41,8 +41,8 @@ def data_clean(filename):
 
     df['DEP_TIME'] = df['DEP_TIME'].apply(convert_time)
     
-    df.to_csv('../data/airport-2020-cleaned.csv', index=False)
+    df.to_csv('../../data/airport-2022-cleaned.csv', index=False)
 
 
-airport_csv = '../data/airport-2020.csv'
+airport_csv = '../../data/airport-2022.csv'
 data_clean(airport_csv)
