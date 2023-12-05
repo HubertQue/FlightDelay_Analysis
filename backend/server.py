@@ -13,13 +13,13 @@ def get_value(string_name, df):
    return ([value for value in df[string_name]])
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "http://52.9.248.230:3000"}})
-# CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
+# CORS(app, resources={r"/*": {"origins": "http://52.9.248.230:3000"}})
+CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
 
 
 
-file_path = "../cmpt732_client/CSV Files/"
-# file_path = "../Data_Analyzing/CSV Files/"
+# file_path = "../cmpt732_client/CSV Files/"
+file_path = "../Data_Analyzing/CSV Files/"
 
 
 path2 = "Graph_2_Month_2020.csv"
