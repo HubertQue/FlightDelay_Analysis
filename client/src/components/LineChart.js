@@ -17,13 +17,28 @@ function LineChart({props}) {
     labels: data['label'],
     datasets: [
       {
-        label: props + ` (X-axis: ${props}, Y-axis: Average Delay time)`,
+        label: props + " in 2020 " + ` (X-axis: ${props}, Y-axis: Average Delay time)`,
         data: data['attribute2'],
         fill: false,
         borderColor: 'rgb(75, 192, 192)',
         tension: 0.1  
+      },
+      {
+        label: props + " in 2021 " +  ` (X-axis: ${props}, Y-axis: Average Delay time)`,
+        data: data['attribute3'],
+        fill: false,
+        borderColor: 'red',
+        tension: 0.1  
+      },
+      {
+        label: props + " in 2022 " + ` (X-axis: ${props}, Y-axis: Average Delay time)`,
+        data: data['attribute4'],
+        fill: false,
+        borderColor: 'green',
+        tension: 0.1  
       }
     ],
+    
   };
 
   return(

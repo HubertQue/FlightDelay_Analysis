@@ -1,0 +1,52 @@
+ORIGIN_STATE_NM,num_delays,avg_delay_time
+Texas,599781,39.39
+California,550515,33.25
+Florida,472194,40.95
+Illinois,340586,38.48
+Georgia,283414,31.61
+North Carolina,224176,39.35
+New York,224011,48.06
+Nevada,188618,33.69
+Virginia,178018,46.00
+Washington,171244,28.65
+Arizona,171055,33.85
+New Jersey,122663,44.72
+Michigan,113052,42.89
+Tennessee,108909,37.72
+Maryland,107728,30.33
+Pennsylvania,102477,46.14
+Hawaii,97936,25.45
+Utah,95685,33.26
+Missouri,94737,36.92
+Massachusetts,87386,41.56
+Minnesota,85602,39.75
+Ohio,60896,44.47
+Oregon,57357,35.97
+Louisiana,53424,41.79
+Kentucky,48170,45.06
+Indiana,39558,42.32
+Wisconsin,33921,48.51
+South Carolina,31620,44.96
+Puerto Rico,26707,47.92
+Oklahoma,24737,46.15
+Alaska,24238,32.42
+Montana,20549,49.68
+Alabama,19718,47.12
+Idaho,19444,45.67
+New Mexico,18045,43.43
+Nebraska,17872,46.28
+Arkansas,17590,48.15
+Colorado,17267,73.24
+Connecticut,17051,43.28
+Iowa,16379,53.12
+Maine,11536,53.39
+North Dakota,11450,68.34
+Rhode Island,11072,43.35
+South Dakota,9668,59.19
+Mississippi,8652,51.04
+Kansas,7561,55.86
+Vermont,4877,61.80
+New Hampshire,4581,44.64
+West Virginia,4221,59.52
+Wyoming,3036,78.33
+U.S. Pacific Trust Territories and Possessions,382,34.66
