@@ -20,10 +20,10 @@ function Navbar() {
           >
           </IconButton>
           <img src={logo} alt="Logo" style={{ marginRight: '20px', width: '50px', height: '50px' }} />
-          <Button color="inherit" component={Link} to="/" sx={{ fontSize: '1rem', marginLeft:20, marginRight: 20 }}>Home Page</Button>
-          <Button color="inherit" component={Link} to="/DataAnalysis" sx={{ fontSize: '1rem',marginRight: 20 }}>Data Analysis</Button>
-          <Button color="inherit" component={Link} to="/TrainingModels" sx={{ fontSize: '1rem',marginRight: 20 }}>Models</Button>
-          <Button color="inherit" component={Link} to="/WeatherForm" sx={{ fontSize: '1rem',marginRight: 10 }}>Weather Form</Button>
+          <Button color="inherit" component={Link} to="/" sx={{ fontSize: '1rem', marginLeft:20, marginRight: 20, textTransform: 'none'  }}>HomePage</Button>
+          <Button color="inherit" component={Link} to="/DataAnalysis" sx={{ fontSize: '1rem',marginRight: 20, textTransform: 'none'   }}>Data Analysis</Button>
+          <Button color="inherit" component={Link} to="/TrainingModels" sx={{ fontSize: '1rem',marginRight: 20, textTransform: 'none'  }}>Models</Button>
+          <Button color="inherit" component={Link} to="/WeatherForm" sx={{ fontSize: '1rem',marginRight: 10 ,textTransform: 'none'  }}>Flight Delay Prediction</Button>
         </Toolbar>
       </AppBar>
     </Box>

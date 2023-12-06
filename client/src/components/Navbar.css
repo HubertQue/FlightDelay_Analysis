@@ -1,6 +1,5 @@
 /* Navbar.css */
 .navbar-container {
-    border: 1px solid #000; /* 黑色边框 */
     padding: 10px;
     margin-bottom: 20px; /* 如果需要的话，给导航栏下面一些空间 */
     border-radius: 5px; /* 边框圆角 */

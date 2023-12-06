@@ -1,20 +1,18 @@
-import React from 'react'
+import React from 'react';
+import { Link } from 'react-router-dom'; 
 import './home-page.css';
-import airplane from '../../src/airplane.png'; // 确保路径正确
-
+import airplane from '../../src/airplane.png';
 
 function HomePage() {
   return (
     <div className="home-page">
-    <img src={airplane} alt="My Image" className="airplane_image" />
-      <div class="container">
-      <div class="block">the source of raw data </div>
-      <div class="block">training data and relevant results </div>
-      <div class="block">about deep learning to do some predictions</div>
+      <div className="container">
+        <Link to="/DataAnalysis" className="block">the source of raw data</Link>
+        <Link to="/TrainingModels" className="block">training data and relevant results</Link>
+        <Link to="/WeatherForm" className="block">about deep learning to do some predictions</Link>
+      </div>
     </div>
-
-    </div>
-  )
+  );
 }
 
-export default HomePage
+export default HomePage;

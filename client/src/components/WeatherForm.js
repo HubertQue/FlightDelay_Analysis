@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { TextField, Button, FormControl, InputLabel, Select, MenuItem, Checkbox, FormControlLabel, Dialog, DialogTitle, DialogContent, Typography  } from '@mui/material';
 
 function WeatherForm() {
   // 定义状态来存储输入值和结果
@@ -58,12 +59,21 @@ function WeatherForm() {
 
       // 获取并处理来自后端的响应
       const responseData = await response.json();
-      console.log(responseData); // 或者做其他处理
-      setResult(`Received response: ${JSON.stringify(responseData)}`);
-
+      let responseMessage;
+      if (responseData === 0) {
+        responseMessage = 'The Expected Delay is 0-15 minutes';
+      } else if (responseData === 1) {
+        responseMessage = 'The Expected Delay is >15 minutes';
+      } else {
+        responseMessage = `Received unexpected response: ${JSON.stringify(responseData)}`;
+      }
+  
+      setResult(responseMessage);
+      showDialog();
     } catch (error) {
       console.error('Error during data submission:', error);
       setResult('Failed to submit data.');
+      showDialog();
     }
   };
 
@@ -102,171 +112,148 @@ const handleCheckboxChange = (event) => {
     });
   }
 };
+
+// 新增一个状态来控制弹窗的打开和关闭
+const [openDialog, setOpenDialog] = useState(false);
+
+// 当表单提交成功或失败时，打开弹窗
+const showDialog = () => {
+  setOpenDialog(true);
+};
+
+// 关闭弹窗的函数
+const handleCloseDialog = () => {
+  setOpenDialog(false);
+};
+
    
-  return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Date:
-          <input 
-            type="date" 
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
-          />
-        </label><br />
+return (
+  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', flexDirection: 'column'  }}>
+    <Typography variant="h6" style={{ marginBottom: '20px' }}>
+        Enter The Information To Make Your Flight Delay Prediction.
+    </Typography>
+    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', width: '50%' }}>
+      <TextField
+        label="Date"
+        type="date"
+        value={date}
+        onChange={(e) => setDate(e.target.value)}
+        margin="normal"
+        InputLabelProps={{
+          shrink: true, 
+        }}
+      />
+      <TextField
+        label="Current Hour"
+        type="text"
+        value={hour}
+        onChange={(e) => setHour(e.target.value)}
+        margin="normal"
+        InputLabelProps={{
+          shrink: true, 
+        }}
+        placeholder="e.g. 0-24"
+      />
+      <TextField
+        label="Airport"
+        type="text"
+        value={airport}
+        onChange={(e) => setAirport(e.target.value)}
+        margin="normal"
+        InputLabelProps={{
+          shrink: true, 
+        }}
+        placeholder="e.g. LAX"
+      />
+      <TextField
+        label="Average Temperature"
+        type="text"
+        value={AveT}
+        onChange={(e) => setAveT(e.target.value)}
+        margin="normal"
+        InputLabelProps={{
+          shrink: true, 
+        }}
+        placeholder="e.g. 50"
+      />
+      <TextField
+        label="Max Temperature"
+        type="text"
+        value={MaxT}
+        onChange={(e) => setMaxT(e.target.value)}
+        margin="normal"
+        InputLabelProps={{
+          shrink: true, 
+        }}
+        placeholder="e.g. 70"
+      />
+      <TextField
+        label="Min Temperature"
+        type="text"
+        value={MinT}
+        onChange={(e) => setMinT(e.target.value)}
+        margin="normal"
+        InputLabelProps={{
+          shrink: true, 
+        }}
+        placeholder="e.g. 40"
+      />
 
-        <label>
-          Current Hour:
-          <input 
-            type="text" 
-            value={hour}
-            onChange={(e) => setHour(e.target.value)}
-          />
-        </label>
-        <span>(e.g. 0-24)</span>
-        <br />
+      <FormControl margin="normal">
+        <InputLabel>Visibility</InputLabel>
+        <Select
+          value={visibility}
+          onChange={(e) => setVisibility(e.target.value)}
+        >
+          <MenuItem value="high">High Visibility (&gt;1 miles)</MenuItem>
+          <MenuItem value="medium">Medium Visibility (0.4-1 miles)</MenuItem>
+          <MenuItem value="low">Low Visibility (0-0.4 miles)</MenuItem>
+          
+          
+        </Select>
+      </FormControl>
 
-        <label>
-          Airport:
-          <input 
-            type="text" 
-            value={airport}
-            onChange={(e) => setAirport(e.target.value)}
-          />
-        </label>
-        <span>(e.g. LAX)</span>
-        <br />
-
-        <label>
-          Average Temperature:
-          <input 
-            type="text" 
-            value={AveT}
-            onChange={(e) => setAveT(e.target.value)}
-          />
-        </label>
-        <span>(eg: 70)</span>
-        <br />
-        <label>
-          Max Temperature:
-          <input 
-            type="text" 
-            value={MaxT}
-            onChange={(e) => setMaxT(e.target.value)}
-          />
-        </label>
-        <span>(eg: 80)</span>
-        <br />
-        <label>
-          Min Temperature:
-          <input 
-            type="text" 
-            value={MinT}
-            onChange={(e) => setMinT(e.target.value)}
-          />
-        </label>
-        <span>(eg: 50)</span>
-        <br />
-
-        <label>
-          Visibility:
-          <select 
-            value={visibility}
-            onChange={(e) => setVisibility(e.target.value)}
-          >
-            <option value="low">Low Visibility <span>(0-0.4 miles)</span></option>
-            <option value="medium">Medium Visibility <span>(0.4-1 miles)</span></option>
-            <option value="high">High Visibility <span>(&gt;1 miles)</span></option>
-          </select>
-        </label><br />
+      <div>
+        <FormControlLabel
+          control={<Checkbox checked={weatherConditions.Fog} onChange={handleCheckboxChange} name="Fog" />}
+          label="Fog"
+        />
+        <FormControlLabel
+          control={<Checkbox checked={weatherConditions.Rain} onChange={handleCheckboxChange} name="Rain" />}
+          label="Rain or Drizzle  "
+        />
+        <FormControlLabel
+          control={<Checkbox checked={weatherConditions.Snow} onChange={handleCheckboxChange} name="Snow" />}
+          label="Snow or Ice Pellets"
+        />
+        <FormControlLabel
+          control={<Checkbox checked={weatherConditions.Hail} onChange={handleCheckboxChange} name="Hail" />}
+          label="Hail"
+        />
+        <FormControlLabel
+          control={<Checkbox checked={weatherConditions.Thunder} onChange={handleCheckboxChange} name="Thunder" />}
+          label="Thunder"
+        />
+        <FormControlLabel
+          control={<Checkbox checked={weatherConditions.Tornado} onChange={handleCheckboxChange} name="Tornado" />}
+          label="Tornado or Funnel Cloud"
+        />
         
-        <div>
-          Weather Condition:
-        </div>
-
-        <div>
-        <label>
-          <input 
-            type="checkbox" 
-            name="Fog" 
-            checked={weatherConditions.Fog} 
-            onChange={handleCheckboxChange} 
-          />
-          Fog
-        </label>
-
-        <label>
-          <input 
-            type="checkbox" 
-            name="Rain" 
-            checked={weatherConditions.Rain} 
-            onChange={handleCheckboxChange} 
-          />
-          Rain or Drizzle
-        </label>
-
-        <label>
-          <input 
-            type="checkbox" 
-            name="Snow" 
-            checked={weatherConditions.Snow} 
-            onChange={handleCheckboxChange} 
-          />
-          Snow or Ice Pellets
-        </label>
-
-        <label>
-          <input 
-            type="checkbox" 
-            name="Hail" 
-            checked={weatherConditions.Hail} 
-            onChange={handleCheckboxChange} 
-          />
-          Hail
-        </label>
-
-        <label>
-          <input 
-            type="checkbox" 
-            name="Thunder" 
-            checked={weatherConditions.Thunder} 
-            onChange={handleCheckboxChange} 
-          />
-          Thunder
-        </label>
-
-        <label>
-          <input 
-            type="checkbox" 
-            name="Tornado" 
-            checked={weatherConditions.Tornado} 
-            onChange={handleCheckboxChange} 
-          />
-          Tornado or Funnel Cloud
-        </label>
-
-        <label>
-          <input 
-            type="checkbox" 
-            name="None" 
-            checked={weatherConditions.None} 
-            onChange={handleCheckboxChange} 
-          />
-          None
-        </label>
       </div>
 
+      <Button type="submit" variant="contained" color="primary" style={{ marginTop: '20px' }}>
+        Start Predict
+      </Button>
+    </form>
 
-        <button type="submit">Submit</button>
-      </form>
-
-      {result && (
-        <div className="result">
-          {result}
-        </div>
-      )}
-    </div>
-  );
+    <Dialog open={openDialog} onClose={handleCloseDialog}>
+      <DialogTitle>Prediction Result:</DialogTitle>
+      <DialogContent>
+        {result}
+      </DialogContent>
+    </Dialog>
+  </div>
+);
 }
 
 export default WeatherForm;
