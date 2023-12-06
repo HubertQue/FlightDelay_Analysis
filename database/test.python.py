@@ -1,0 +1,15 @@
+graph_dic = {'Graph_1_Year.csv': ['int', 'int', 'float'], 'Graph_2_Month.csv': ['string', 'int', 'float'],
+     'Graph_3_Weekday.csv': ['string', 'int', 'float'], 'Graph_4_Hour.csv': ['int', 'int', 'float'],
+     'Graph_5_State.csv': ['string', 'int', 'float'], 'Graph_6_Top10 States.csv': ['string', 'string', 'int', 'float'],
+     'Graph_7_City.csv': ['string', 'int', 'float'], 'Graph_8_Top20 Cities.csv': ['string', 'string', 'int', 'float'],
+     'Graph_9_Elevation.csv': ['int', 'int', 'float'], 'Graph_10_Temp.csv': ['int', 'int', 'float'],
+     'Graph_11_DEWP.csv': ['int', 'int', 'float'], 'Graph_12_VISIB.csv': ['float', 'int', 'float'],
+     'Graph_13_VISIB Category.csv': ['string', 'int', 'float'],
+     'Graph_14_VISIB_States.csv': ['string', 'string', 'int', 'float'],
+     'Graph_15_VISIB_Cities.csv': ['string', 'string', 'int', 'float'], 'Graph_16_WDSP.csv': ['int', 'int', 'float'],
+     'Graph_17_MXSPD.csv': ['int', 'int', 'float'], 'Graph_18_PRCP.csv': ['int', 'int', 'float'],
+     'Graph_19_SNDP.csv': ['int', 'int', 'float'], 'Graph_20_Fog.csv': ['int', 'int', 'float'],
+     'Graph_21_Rain_Drizzle.csv': ['int', 'int', 'float'], 'Graph_22_Snow_Ice Pellets.csv': ['int', 'int', 'float'],
+     'Graph_23_Hail.csv': ['int', 'int', 'float'], 'Graph_24_Thunder.csv': ['int', 'int', 'float'],
+     'Graph_25_Tornado_FunnelCloud.csv': ['int', 'int', 'float']}
+print(graph_dic['Graph_23_Hail' + '.csv'])
