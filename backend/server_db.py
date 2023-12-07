@@ -383,7 +383,7 @@ def getWeatherData():
     print("result is: " , result)
     prediction, probability = Predict.predict_delay(result)
 
-    return str(prediction)
+    return str({'pred':prediction, 'prob':probability})
 
 if __name__ == "__main__":
   app.run(debug=True)

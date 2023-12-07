@@ -60,12 +60,12 @@ function WeatherForm() {
       // 获取并处理来自后端的响应
       const responseData = await response.json();
       let responseMessage;
-      if (responseData === 0) {
-        responseMessage = 'The Expected Delay is 0-15 minutes';
-      } else if (responseData === 1) {
-        responseMessage = 'The Expected Delay is >15 minutes';
+      if (responseData['pred'] === '0') {
+        responseMessage = `The Expected Delay is 0-15 minutes. (Prediction confidence: ${(responseData['prob'] * 100).toFixed(2)}%)`;
+      } else if (responseData['pred'] === '1') {
+        responseMessage = `The Expected Delay is >15 minutes. (Prediction confidence: ${(responseData['prob'] * 100).toFixed(2)}%)`;
       } else {
-        responseMessage = 'Unknown airport code received. Please provide a valid code.';
+        responseMessage = `Unknown airport code received. Please provide a valid code. ${responseData['pred']}`;
       }
   
       setResult(responseMessage);
