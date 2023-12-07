@@ -8,7 +8,34 @@ import csv
 import pandas as pd
 from db_get_data import query_table_and_convert_to_column_lists
 
+from cassandra.auth import PlainTextAuthProvider
+from cassandra.cluster import Cluster, ExecutionProfile, EXEC_PROFILE_DEFAULT
+from cassandra import ConsistencyLevel
+from ssl import SSLContext, PROTOCOL_TLSv1_2, CERT_REQUIRED
+import os
+import json
 
+
+def create_session():
+    contact_point = "cassandra.us-west-2.amazonaws.com"
+    ssl_context = SSLContext(PROTOCOL_TLSv1_2)
+    cert_path = os.path.join(os.path.dirname(__file__), 'resources/sf-class2-root.crt')
+    ssl_context.load_verify_locations(cert_path)
+    ssl_context.verify_mode = CERT_REQUIRED
+
+    with open('../../../credential/credentials.json', 'r') as file:
+        credentials = json.load(file)
+
+    auth_provider = PlainTextAuthProvider(username='twhitlock-at-697306959183', password=credentials["password"])
+    profile = ExecutionProfile(consistency_level=ConsistencyLevel.LOCAL_QUORUM)
+
+    cluster = Cluster(contact_points=[contact_point], port=9142, auth_provider=auth_provider, ssl_context=ssl_context,
+                      execution_profiles={EXEC_PROFILE_DEFAULT: profile})
+
+    session = cluster.connect()
+
+    return session
+session = create_session()
 
 
 
@@ -19,6 +46,40 @@ app = Flask(__name__)
 # CORS(app, resources={r"/*": {"origins": "http://52.9.248.230:3000"}})
 CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
 
+def sort_month(data):
+         month_order = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+         index_map = {month: index for index, month in enumerate(month_order)}
+
+         sorted_indices = sorted(range(len(data['month'])), key=lambda i: index_map[data['month'][i]])
+         for key in data:
+                data[key] = [data[key][i] for i in sorted_indices]
+         return data
+
+def sort_week(data):
+         weekday_order = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+         index_map = {week: index for index, week in enumerate(weekday_order)}
+
+         sorted_indices = sorted(range(len(data['day_of_week'])), key=lambda i: index_map[data['day_of_week'][i]])
+         for key in data:
+                data[key] = [data[key][i] for i in sorted_indices]
+         return data
+
+
+def sort_high_low(data, attribute_name):
+         weekday_order = ['High_VISIB', 'Medium_VISIB', 'Low_VISIB']
+         index_map = {week: index for index, week in enumerate(weekday_order)}
+
+         sorted_indices = sorted(range(len(data[attribute_name])), key=lambda i: index_map[data[attribute_name][i]])
+         for key in data:
+                data[key] = [data[key][i] for i in sorted_indices]
+         return data
+
+
+def sort_number(data, attribute_name):
+    sorted_indices = sorted(range(len(data[attribute_name])), key=lambda i: data[attribute_name][i])
+    for key in data:
+        data[key] = [data[key][i] for i in sorted_indices]
+    return data
 
 
 # file_path = "../cmpt732_client/CSV Files/"
@@ -78,8 +139,8 @@ def getData():
 @app.route("/lineChartData/Year")
 def getLineChartDataYear():
   table = "Graph_1_Year"
-  df = query_table_and_convert_to_column_lists(table)
-  
+  df = sort_number(query_table_and_convert_to_column_lists(session, table), str.lower('YEAR'))
+  print(df)
   return ({"label": get_value(str.lower('YEAR'), df),
           "attribute2": get_value('avg_delay_time', df)})
 
@@ -91,9 +152,13 @@ def getLineChartDataMonth():
   path3 = "Graph_2_Month_2021"
   path4 = "Graph_2_Month_2022"
   
-  df = query_table_and_convert_to_column_lists(path2)
-  df3 = query_table_and_convert_to_column_lists(path3)
-  df4 = query_table_and_convert_to_column_lists(path4)
+  a = query_table_and_convert_to_column_lists(session, path2)
+  print(' ---------- ')
+  print(a)
+  df = sort_month(query_table_and_convert_to_column_lists(session, path2))
+  df3 = sort_month(query_table_and_convert_to_column_lists(session, path3))
+  df4 = sort_month(query_table_and_convert_to_column_lists(session, path4))
+  print(df)
   
   return ({"label": get_value('month', df),
           "attribute2": get_value('avg_delay_time', df),
@@ -106,9 +171,10 @@ def getLineChartDataWeek():
   path2 = "Graph_3_Weekday_2020"
   path3 = "Graph_3_Weekday_2021"
   path4 = "Graph_3_Weekday_2022"
-  df = query_table_and_convert_to_column_lists(path2)
-  df3 = query_table_and_convert_to_column_lists(path3)
-  df4 = query_table_and_convert_to_column_lists(path4)
+  print(query_table_and_convert_to_column_lists(session, path2))
+  df = sort_week(query_table_and_convert_to_column_lists(session, path2))
+  df3 = sort_week(query_table_and_convert_to_column_lists(session, path3))
+  df4 = sort_week(query_table_and_convert_to_column_lists(session, path4))
   
   
   return ({"label": get_value('day_of_week', df),
@@ -122,9 +188,11 @@ def getLineChartDataHour():
   path2 = "Graph_4_Hour_2020"
   path3 = "Graph_4_Hour_2021"
   path4 = "Graph_4_Hour_2022"
-  df = query_table_and_convert_to_column_lists(path2)
-  df3 = query_table_and_convert_to_column_lists(path3)
-  df4 = query_table_and_convert_to_column_lists(path4)
+  df = sort_number(query_table_and_convert_to_column_lists(session, path2), str.lower('HOUR'))
+  df3 = sort_number(query_table_and_convert_to_column_lists(session, path3), str.lower('HOUR'))
+  df4 = sort_number(query_table_and_convert_to_column_lists(session, path4), str.lower('HOUR'))
+
+
   
 
   
@@ -147,11 +215,9 @@ def getLineChartDataCountry():
 @app.route("/barChartData/Elevation")
 def getLineChartDataElevation():
   path2 = "Graph_9_Elevation"
-  df = query_table_and_convert_to_column_lists(path2)
-    
-  print(get_value('ELEVATION_CATEGORY'.lower(), df))
-  print(path2)
-  print(get_value('avg_delay_time', df))
+  #df = query_table_and_convert_to_column_lists(session, path2)
+  df = sort_number(query_table_and_convert_to_column_lists(session, path2), str.lower('ELEVATION_CATEGORY'))
+
 
   return ({"label": get_value(str.lower('ELEVATION_CATEGORY'), df),
           "data": get_value('avg_delay_time', df),          
@@ -161,8 +227,8 @@ def getLineChartDataElevation():
 @app.route("/barChartData/Temperature")
 def getLineChartDataTemp():
   path2 = "Graph_10_Temp"
-  df = query_table_and_convert_to_column_lists(path2)
-
+  #df = query_table_and_convert_to_column_lists(session, path2)
+  df = sort_number(query_table_and_convert_to_column_lists(session, path2), str.lower('TEMP_CATEGORY'))
   
   return ({"label": get_value(str.lower('TEMP_CATEGORY'), df),
           "data": get_value('avg_delay_time', df),
@@ -172,7 +238,10 @@ def getLineChartDataTemp():
 @app.route("/barChartData/DEWP")
 def getLineChartDataDEWP():
   path2 = "Graph_11_DEWP"
-  df = query_table_and_convert_to_column_lists(path2)
+
+  #df = query_table_and_convert_to_column_lists(session, path2)
+  df = sort_number(query_table_and_convert_to_column_lists(session, path2), str.lower('DEWP_CATEGORY'))
+  
 
   
   return ({"label": get_value(str.lower('DEWP_CATEGORY'), df),
@@ -183,7 +252,8 @@ def getLineChartDataDEWP():
 @app.route("/barChartData/VISIB")
 def getLineChartDataVISIB():
   path2 = "Graph_12_VISIB"
-  df = query_table_and_convert_to_column_lists(path2)
+  #df = query_table_and_convert_to_column_lists(session, path2)
+  df = sort_number(query_table_and_convert_to_column_lists(session, path2), str.lower('VISIB'))
 
 
   
@@ -196,7 +266,8 @@ def getLineChartDataVISIB():
 @app.route("/barChartData/VISIB_CATEGORY")
 def getLineChartDataVISIB_CATEGORY():
   path2 = "Graph_13_VISIB_Category"
-  df = query_table_and_convert_to_column_lists(path2)
+  #df = query_table_and_convert_to_column_lists(session, path2)
+  df = sort_high_low(query_table_and_convert_to_column_lists(session, path2), str.lower('VISIB_CATEGORY'))
 
   
   return ({"label": get_value(str.lower('VISIB_CATEGORY'), df),
@@ -207,7 +278,9 @@ def getLineChartDataVISIB_CATEGORY():
 @app.route("/barChartData/WDSP")
 def getLineChartDataWDSP():
   path2 = "Graph_16_WDSP"
-  df = query_table_and_convert_to_column_lists(path2)
+  #df = query_table_and_convert_to_column_lists(session, path2)
+  df = sort_number(query_table_and_convert_to_column_lists(session, path2),str.lower('WDSP_CATEGORY'))
+
 
   
   return ({"label": get_value(str.lower('WDSP_CATEGORY'), df),
@@ -218,7 +291,9 @@ def getLineChartDataWDSP():
 @app.route("/barChartData/MXSPD")
 def getLineChartDataMXSPD():
   path2 = "Graph_17_MXSPD"
-  df = query_table_and_convert_to_column_lists(path2)
+  #df = query_table_and_convert_to_column_lists(session, path2)
+  df = sort_number(query_table_and_convert_to_column_lists(session, path2),str.lower('MXSPD_CATEGORY'))
+
 
   
   return ({"label": get_value(str.lower('MXSPD_CATEGORY'), df),
@@ -229,7 +304,8 @@ def getLineChartDataMXSPD():
 @app.route("/barChartData/PRCP")
 def getLineChartDataPRCP():
   path2 = "Graph_18_PRCP"
-  df = query_table_and_convert_to_column_lists(path2)
+  #df = query_table_and_convert_to_column_lists(session, path2)
+  df = sort_number(query_table_and_convert_to_column_lists(session, path2),str.lower('PRCP_CATEGORY'))
 
   
   return ({"label": get_value(str.lower('PRCP_CATEGORY'), df),
@@ -240,7 +316,8 @@ def getLineChartDataPRCP():
 @app.route("/barChartData/SNDP")
 def getLineChartDataSNDP():
   path2 = "Graph_19_SNDP"
-  df = query_table_and_convert_to_column_lists(path2)
+  #df = query_table_and_convert_to_column_lists(session, path2)
+  df = sort_number(query_table_and_convert_to_column_lists(session, path2),str.lower('SNDP_CATEGORY'))
 
   
   return ({"label": get_value(str.lower('SNDP_CATEGORY'), df),

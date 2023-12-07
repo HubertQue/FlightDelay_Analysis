@@ -32,9 +32,9 @@ def create_session():
 
 
 
-def query_table_and_convert_to_column_lists(table_name):
+def query_table_and_convert_to_column_lists(session, table_name):
     keyspace_name = 'flightdb'
-    session = create_session()
+    #session = create_session()
     try:
         query = f"SELECT * FROM {keyspace_name}.{table_name}"
         rows = session.execute(query)
@@ -58,8 +58,8 @@ def main():
 
     #session = create_session()
     #your_keyspace = 'flightdb'
-    table_name = 'Graph_6_Top10_States'
-    columns = query_table_and_convert_to_column_lists(table_name)
+    #table_name = 'Graph_6_Top10_States'
+    columns = query_table_and_convert_to_column_lists(session, table_name)
     print(columns)
 
 if __name__ == "__main__":
