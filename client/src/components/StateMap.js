@@ -10,7 +10,7 @@ const StateMap = () => {
   return (
     <div>
       <Typography variant="subtitle1" align="center" style={{ margin: '20px' }}>
-        Each state's number represents the Average Delay Time in minutes. Darker colors indicate higher values, while lighter colors indicate lower values.
+        <b>Each state's number represents the Average Delay Time in minutes. Darker colors indicate higher values, while lighter colors indicate lower values.</b>
       </Typography>
       <MapChart data={data} />
     </div>

@@ -1,5 +1,5 @@
 .home-page {
-  background-image: url('../../src/airplane.png'); 
+  background-image: url('../../../src/static/airplane.png'); 
   background-size: cover; 
   background-position: center;
   height: 100vh; 
@@ -20,7 +20,8 @@
   align-items: center;
   background: #f0f0f0; 
   padding: 20px;
-  width: 200px; 
+  height: 30px;
+  width: 300px; 
   text-align: center; 
   border: 3px solid #555; 
   border-radius: 8px;

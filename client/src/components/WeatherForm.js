@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { TextField, Button, FormControl, InputLabel, Select, MenuItem, Checkbox, FormControlLabel, Dialog, DialogTitle, DialogContent, Typography  } from '@mui/material';
+import './css/WeatherForm.css'; 
+
 
 function WeatherForm() {
   // 定义状态来存储输入值和结果
@@ -128,9 +130,9 @@ const handleCloseDialog = () => {
 
    
 return (
-  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', flexDirection: 'column'  }}>
+  <div className="formContainer" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '95vh', flexDirection: 'column'  }}>
     <Typography variant="h6" style={{ marginBottom: '20px' }}>
-        Enter The Information To Make Your Flight Delay Prediction.
+        Enter The Below Information To Predict Your Flight Delay
     </Typography>
     <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', width: '50%' }}>
       <TextField

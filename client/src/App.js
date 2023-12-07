@@ -5,7 +5,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import Navbar from './components/Navbar';
 
-import TrainingModels from './components/TrainingModels';
+import DataIntro from './components/DataIntro';
 import DataAnalysis from './components/DataAnalysis';
 import WeatherForm from './components/WeatherForm';
 import HomePage from './components/HomePage';
@@ -20,8 +20,8 @@ function App() {
         
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/DataIntro" element={<DataIntro />} />
           <Route path="/DataAnalysis" element={<DataAnalysis />} />
-          <Route path="/TrainingModels" element={<TrainingModels />} />
           <Route path="/WeatherForm" element={<WeatherForm />} />
         </Routes>
           

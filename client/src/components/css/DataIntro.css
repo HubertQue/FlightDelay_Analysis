@@ -3,13 +3,19 @@
   flex-direction: column;
   align-items: flex-start;
   padding: 20px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
   margin: 20px;
 }
 
 .TrainingModelsContainer h1 {
-  margin: 0;
-  margin-bottom: 20px; 
+  margin-bottom: 20px; /* 增加标题下的外边距 */
+  padding: 10px 0; /* 增加标题的上下内边距 */
+  margin-left: 50px;
+}
+
+.TrainingModelsContainer div {
+  margin-bottom: 20px; /* 增加段落下的外边距 */
+  padding: 50px; /* 增加段落的内边距 */
 }
 
 .table-container {
@@ -21,6 +27,8 @@ table {
   border-collapse: collapse;
   width: 80%;
   margin: 0 auto;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
 th, td {
