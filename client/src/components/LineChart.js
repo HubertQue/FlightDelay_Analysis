@@ -13,25 +13,54 @@ function LineChart({props}) {
       .catch(error => console.error('Error fetching data: ', error));
   }, [props]);
 
+  const options = {
+    scales: {
+      x: {
+        title: {
+          display: true,
+          text: props,
+          font: {
+            size: 15,
+          }
+        }
+      },
+      y: {
+        title: {
+          display: true,
+          text: 'Average Delay Time (minutes)',
+          font: {
+            size: 15,
+          }
+        }
+      }
+    },
+    plugins: {
+      legend: {
+        display: true,
+        position: 'top',
+      }
+    },
+  };
+
   const inputs = {
     labels: data['label'],
     datasets: [
       {
-        label: props + " in 2020 " + ` (X-axis: ${props}, Y-axis: Average Delay time)`,
+        label: props + " in 2020 ",
         data: data['attribute2'],
         fill: false,
         borderColor: 'rgb(75, 192, 192)',
         tension: 0.1  
       },
       {
-        label: props + " in 2021 " +  ` (X-axis: ${props}, Y-axis: Average Delay time)`,
+        label: props + " in 2021 ",
         data: data['attribute3'],
         fill: false,
         borderColor: 'red',
         tension: 0.1  
       },
       {
-        label: props + " in 2022 " + ` (X-axis: ${props}, Y-axis: Average Delay time)`,
+        label: props + " in 2022 ",
         data: data['attribute4'],
         fill: false,
         borderColor: 'green',
@@ -43,7 +72,7 @@ function LineChart({props}) {
 
   return(
     <div>
-      {inputs && <Line data={inputs} />}
+      {inputs && <Line data={inputs} options={options}/>}
     </div>
   );
 }

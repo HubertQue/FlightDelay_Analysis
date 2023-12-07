@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Bar } from 'react-chartjs-2';
 import 'chart.js/auto';
 
-function BarChart({ props }) { // 假设你传递的是一个endpoint参数
+function BarChart({ props }) { 
 
   const [chartData, setChartData] = useState({});
 
@@ -13,10 +13,50 @@ function BarChart({ props }) { // 假设你传递的是一个endpoint参数
       .catch(error => console.error('Error fetch data: ', error));
   }, [props]);
 
+  const getXAxisTitle = (prop) => {
+    console.log(props)
+    switch (prop) {
+      case 'Elevation':
+        return 'Elevation (Meters)';
+      case 'Temperature':
+        return 'Temperature (Centigrade)';
+      case 'DEWP':
+        return 'Dew Point (Fahrenheit)';
+      case 'WDSP':
+        return 'Wind Speed (Knots)';
+      case 'PRCP':
+        return 'Precipitation (Inches)';
+      case 'SNDP':
+        return 'Snow Depth (Inches)';
+      case 'FRSHTT':
+        return 'Extreme Weather';
+      default:
+        return 'Default X Axis Title';
+    }
+  };
+
+  const xAxisTitle = getXAxisTitle(props);
+
   const options = {
     scales: {
       y: {
-        beginAtZero: true
+        beginAtZero: true,
+        title: {
+          display: true,
+          text: 'Average Delay Time (minutes)', 
+          font: {
+            size: 15 
+          }
+        }
+      },
+      x: {
+        title: {
+          display: true,
+          text: xAxisTitle,
+          font: {
+            size: 15,
+          }
+        }
       }
     }
   };

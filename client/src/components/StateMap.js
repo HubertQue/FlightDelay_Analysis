@@ -1,5 +1,6 @@
 import React from 'react';
 import MapChart from "./MapChart";
+import Typography from '@mui/material/Typography';
 
 const StateMap = () => {
 
@@ -8,6 +9,9 @@ const StateMap = () => {
 
   return (
     <div>
+      <Typography variant="subtitle1" align="center" style={{ margin: '20px' }}>
+        Each state's number represents the Average Delay Time in minutes. Darker colors indicate higher values, while lighter colors indicate lower values.
+      </Typography>
       <MapChart data={data} />
     </div>
   );

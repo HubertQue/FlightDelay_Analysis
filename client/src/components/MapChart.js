@@ -38,7 +38,7 @@ const MapChart = ({ data }) => {
   };
 
   return (
-    <div style={{ position: 'relative' }}>
+    <div style={{ position: 'relative',marginLeft: '150px' }}>
       {tooltipContent && (
         <div style={{
           position: 'absolute',
@@ -56,7 +56,7 @@ const MapChart = ({ data }) => {
       <ComposableMap 
         projection="geoAlbersUsa"
       projectionConfig={{
-        scale: 800,
+        scale: 1200,
         translate: [487.5, 305]
       }}
       style={{
@@ -64,7 +64,7 @@ const MapChart = ({ data }) => {
         height: "610px"
       }}
       >
-        <Geographies geography={geoUrl}>
+        <Geographies geography={geoUrl} >
           {({ geographies }) =>
             geographies.map(geo => {
               // console.log(geo.properties.name)
@@ -79,7 +79,12 @@ const MapChart = ({ data }) => {
                   onMouseMove={(event) => handleMouseEnter(geo, cur, event)}
                   onMouseLeave={handleMouseLeave}
                   style={{
-                    
+                    default: {
+                      outline: 'none'
+                    },
+                    hover: {
+                      outline: 'none'
+                    },
                     pressed: {
                       outline: 'none'
                     }

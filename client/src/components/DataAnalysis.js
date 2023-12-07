@@ -130,16 +130,12 @@ const Content = ({ selectedItem, secondaryFilter}) => {
         return <LineChart props="Hour"/>;
       case "Country": 
         return <StateMap />;
-      case "City": 
-        return <></>;
       case "Elevation": 
         return <BarChart props="Elevation"/>;
       case "Temperature": 
         return <BarChart props="Temperature"/>;
       case "DEWP": 
         return <BarChart props="DEWP"/>;
-      case "VISIB": 
-        return ;
       case "WDSP": 
         return <BarChart props="WDSP"/>;  
       case "PRCP": 
@@ -168,8 +164,8 @@ const DataAnalysis = () => {
 
   const allFiltersMap = {
     'time': ['Year', 'Month', 'Week', 'Hour'],
-    'geography': ['Country', 'City'],
-    'weather': ['Elevation', 'Temperature', 'DEWP', 'VISIBILITY', 'WDSP', 'PRCP','SNDP', 'FRSHTT']
+    'geography': ['Country'],
+    'weather': ['Elevation', 'Temperature', 'DEWP', 'WDSP', 'PRCP','SNDP', 'FRSHTT']
   };
 
   useEffect(() => {
