@@ -130,7 +130,7 @@ const handleCloseDialog = () => {
 
    
 return (
-  <div className="formContainer" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '95vh', flexDirection: 'column'  }}>
+  <div className="formContainer" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '110vh', flexDirection: 'column'  }}>
     <Typography variant="h6" style={{ marginBottom: '20px' }}>
         Enter The Below Information To Predict Your Flight Delay
     </Typography>
