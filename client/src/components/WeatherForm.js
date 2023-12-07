@@ -65,7 +65,7 @@ function WeatherForm() {
       } else if (responseData === 1) {
         responseMessage = 'The Expected Delay is >15 minutes';
       } else {
-        responseMessage = `Received unexpected response: ${JSON.stringify(responseData)}`;
+        responseMessage = 'Unknown airport code received. Please provide a valid code.';
       }
   
       setResult(responseMessage);
@@ -152,10 +152,10 @@ return (
         InputLabelProps={{
           shrink: true, 
         }}
-        placeholder="e.g. 0-24"
+        placeholder="e.g. 0-23"
       />
       <TextField
-        label="Airport"
+        label="IATA Airport Code"
         type="text"
         value={airport}
         onChange={(e) => setAirport(e.target.value)}
@@ -163,7 +163,7 @@ return (
         InputLabelProps={{
           shrink: true, 
         }}
-        placeholder="e.g. LAX"
+        placeholder="e.g. LAX or PHX or HDN"
       />
       <TextField
         label="Average Temperature"
@@ -174,7 +174,7 @@ return (
         InputLabelProps={{
           shrink: true, 
         }}
-        placeholder="e.g. 50"
+        placeholder="e.g. 50.0"
       />
       <TextField
         label="Max Temperature"
@@ -185,7 +185,7 @@ return (
         InputLabelProps={{
           shrink: true, 
         }}
-        placeholder="e.g. 70"
+        placeholder="e.g. 70.0"
       />
       <TextField
         label="Min Temperature"
@@ -196,7 +196,7 @@ return (
         InputLabelProps={{
           shrink: true, 
         }}
-        placeholder="e.g. 40"
+        placeholder="e.g. 40.0"
       />
 
       <FormControl margin="normal">

@@ -17,16 +17,20 @@
 }
 
 .block {
-  background: white; 
+  align-items: center;
+  background: #f0f0f0; 
   padding: 20px;
   width: 200px; 
   text-align: center; 
-  border: 1px solid #000; 
+  border: 3px solid #555; 
+  border-radius: 8px;
   cursor: pointer; 
   transition: background-color 0.3s; 
   text-decoration: none;
+  color: #333;
+  font-weight: bold;
 }
 
 .block:hover {
-  background-color: #f0f0f0;
+  background-color: #4287f5;
 }
