@@ -12,6 +12,12 @@
   padding: 10px 0; /* 增加标题的上下内边距 */
   margin-left: 50px;
 }
+.TrainingModelsContainer h3 {
+  margin-left: 50px;
+}
+.TrainingModelsContainer h2 {
+  margin-left: 50px;
+}
 
 .TrainingModelsContainer div {
   margin-bottom: 20px; /* 增加段落下的外边距 */

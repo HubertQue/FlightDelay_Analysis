@@ -81,7 +81,7 @@ function DataIntro() {
   return (
     <div className='TrainingModelsContainer'>
       <h1>Introduction</h1>
-      <div>Inspired by the Kaggle dataset&nbsp;            
+      <div style={{paddingTop:'0px', paddingBottom:'0px'}}>Inspired by the Kaggle dataset&nbsp;            
         <a href="https://www.kaggle.com/datasets/threnjen/2019-airline-delays-and-cancellations" target="_blank" rel="noopener noreferrer">
           https://www.kaggle.com/datasets/threnjen/2019-airline-delays-and-cancellations
         </a>
@@ -91,18 +91,21 @@ function DataIntro() {
         contains a wealth of relevant attributes, which has rich potential that we can do more research by using more attributes and expanding the target year 
         from a single year to several years.
       </div>
+      <h2>Below are the links of our two raw datasets and the tables of attributes</h2>
       <h1>
         <a href="https://www.ncei.noaa.gov/access/search/data-search/global-summary-of-the-day" target="_blank" rel="noopener noreferrer">
-          Source Dataset 1 
-        </a>
-
+          Weather Dataset   
+        </a> 
+        
       </h1>
+      <h3><p><i>From National Centers for Environmental Information (NOAA)</i></p></h3>
       <DataTable1 />
       <h1>
         <a href="https://www.transtats.bts.gov/Fields.asp?gnoyr_VQ=FGK" target="_blank" rel="noopener noreferrer">
-        Source Dataset 2
+          Flight Status Dataset
         </a>
       </h1>
+      <h3><p><i>From Bureau of Transportation statistics</i></p></h3>
       <DataTable2 />
     </div>
   )
