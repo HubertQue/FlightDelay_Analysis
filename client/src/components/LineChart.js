@@ -41,6 +41,7 @@ function LineChart({props}) {
       }
     },
   };
+  
 
   const inputs = {
     labels: data['label'],
@@ -69,10 +70,25 @@ function LineChart({props}) {
     ],
     
   };
+  
+  const inputs2 = {
+    labels: data['label'],
+    datasets: [
+      {
+        label: props,
+        data: data['attribute2'],
+        fill: false,
+        borderColor: 'rgb(75, 192, 192)',
+        tension: 0.1  
+      }
+    ],
+  };
+
+  const input = props === "Year" ? inputs2 : inputs;
 
   return(
     <div>
-      {inputs && <Line data={inputs} options={options}/>}
+      {inputs && <Line data={input} options={options}/>}
     </div>
   );
 }
