@@ -2,6 +2,8 @@
 
 ### Prerequisites:
 
+Please note that our project requires Python version 3.9 or higher to run.
+
 ```bash
 # Clone repository locally
 # HTTPS
@@ -11,37 +13,39 @@ git clone git@github.sfu.ca:zqa14/FlightDelay_Analysis.git
 # CD into folder using terminal
 cd FlightDelay_Analysis
 # install environment
-pip install -r requirements.txt
+pip install -r requirements.txt --no-binary :all:
 ```
 
 ### STEP 1:
 
-Using terminal 1 as frontend:
+Build the frontend static file:
 
 ```bash
 # Starting from the FlightDelay_Analysis folder
-# Open frontend folder
+# Open Frontend folder 
 cd ./client
-# install the dependencies in package.json
+# install dependency
 npm i
-# start the frontend server on port "http://127.0.0.1:3000"
-npm start
+# build the static frontend file
+npm run build
+# back to the FlightDelay_Analysis root
+cd ..
 ```
 
 ### STEP 2:
 
-Using another terminal 2 as backend:
+Open a terminal as backend (please ensure that port 5000 is not in use):
 
 ```bash
 # Starting from the FlightDelay_Analysis folder
-# Open backend folder
+# Open backend folder 
 cd ./backend
 # (for Windows) enter the venv vitural environment
 source venv/Scripts/activate
 # start the backend server on port "http://127.0.0.1:5000"
-python server_db.py
+python server.py
 ```
 
 ### STEP 3:
 
-Choose a browser and enter "http://localhost:3000" to view the website.
+Choose a browser and enter "http://localhost:5000" to view the website.
