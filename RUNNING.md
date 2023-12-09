@@ -36,8 +36,6 @@ Using another terminal 2 as backend:
 # Starting from the FlightDelay_Analysis folder
 # Open backend folder 
 cd ./backend
-# (for macOS) enter the venv vitural environment
-source venv/bin/activate
 # (for Windows) enter the venv vitural environment
 source venv/Scripts/activate
 # start the backend server on port "http://127.0.0.1:5000"
