@@ -17,24 +17,26 @@ import json
 
 
 def create_session():
-    contact_point = "cassandra.us-west-2.amazonaws.com"
     ssl_context = SSLContext(PROTOCOL_TLSv1_2)
-    cert_path = os.path.join(os.path.dirname(__file__), 'resources/sf-class2-root.crt')
-    ssl_context.load_verify_locations(cert_path)
+    ssl_context.load_verify_locations(os.path.join(os.path.dirname(__file__), 'resources/sf-class2-root.crt'))
     ssl_context.verify_mode = CERT_REQUIRED
 
-    with open('../../../credential/credentials.json', 'r') as file:
-        credentials = json.load(file)
-
-    auth_provider = PlainTextAuthProvider(username='twhitlock-at-697306959183', password=credentials["password"])
+    #pw_file = open('../../../credential/credentials.json', 'r')
+    pw_file = open('./credentials.json', 'r')
+    login_info = json.load(pw_file)
+    if pw_file:
+        pw_file.close()
+    auth_provider = PlainTextAuthProvider(username='twhitlock-at-697306959183', password=login_info["password"])
     profile = ExecutionProfile(consistency_level=ConsistencyLevel.LOCAL_QUORUM)
-
-    cluster = Cluster(contact_points=[contact_point], port=9142, auth_provider=auth_provider, ssl_context=ssl_context,
+    contact_endpoint = "cassandra.us-west-2.amazonaws.com"
+    default_db_port = 9142
+    db_cluster = Cluster(contact_points=[contact_endpoint], port=default_db_port, auth_provider=auth_provider, ssl_context=ssl_context,
                       execution_profiles={EXEC_PROFILE_DEFAULT: profile})
 
-    session = cluster.connect()
+    return db_cluster.connect()
 
-    return session
+
+    
 session = create_session()
 
 
@@ -383,7 +385,7 @@ def getWeatherData():
     print("result is: " , result)
     prediction, probability = Predict.predict_delay(result)
 
-    return str({'pred':prediction, 'prob':probability})
+    return str(prediction)
 
 if __name__ == "__main__":
   app.run(debug=True)
