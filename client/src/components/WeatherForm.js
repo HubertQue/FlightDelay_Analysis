@@ -4,7 +4,7 @@ import './css/WeatherForm.css';
 
 
 function WeatherForm() {
-  // 定义状态来存储输入值和结果
+
   const [date, setDate] = useState('');
   const [hour, setHour] = useState('');
   const [airport, setAirport] = useState('');
@@ -12,10 +12,10 @@ function WeatherForm() {
   const [MaxT, setMaxT] = useState('');
   const [MinT, setMinT] = useState('');
   const [visibility, setVisibility] = useState('high');
-  // const [weatherCondition, setWeatherCondition] = useState('');
+
   const [result, setResult] = useState(null);
 
-  // 处理表单提交
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!date.trim()) {
@@ -46,7 +46,7 @@ function WeatherForm() {
 
     const data = { date, hour, airport, AveT, MaxT, MinT, visibility, weatherConditions };
     try {
-      // 发送 POST 请求到后端
+
       const response = await fetch('http://localhost:5000/weatherform', {
         method: 'POST',
         headers: {
@@ -59,7 +59,6 @@ function WeatherForm() {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      // 获取并处理来自后端的响应
       const responseData = await response.json();
       let responseMessage;
       if (responseData['pred'] === '0') {
@@ -95,7 +94,6 @@ const handleCheckboxChange = (event) => {
   const { name, checked } = event.target;
 
   if (name === 'None') {
-    // 如果选择了 "None"，清除其他所有选项
     setWeatherConditions({
       Fog: false,
       Rain: false,
@@ -106,7 +104,6 @@ const handleCheckboxChange = (event) => {
       None: checked
     });
   } else {
-    // 如果选择了其他选项，则确保 "None" 不被选中
     setWeatherConditions({
       ...weatherConditions,
       [name]: checked,
@@ -115,15 +112,13 @@ const handleCheckboxChange = (event) => {
   }
 };
 
-// 新增一个状态来控制弹窗的打开和关闭
 const [openDialog, setOpenDialog] = useState(false);
 
-// 当表单提交成功或失败时，打开弹窗
+
 const showDialog = () => {
   setOpenDialog(true);
 };
 
-// 关闭弹窗的函数
 const handleCloseDialog = () => {
   setOpenDialog(false);
 };

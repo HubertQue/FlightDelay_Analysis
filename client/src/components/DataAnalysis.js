@@ -103,10 +103,10 @@ const SecondaryNavbar = ({ filters, onFilterSelected, selectedFilter }) => {
           onClick={() => onFilterSelected(filter)}
           variant="outlined"
           style={{
-            margin: '0 8px', // 设置按钮间距
-            color: selectedFilter === filter ? 'darkslategray' : 'white', // 选中的按钮用深色文字，未选中的用白色文字
-            borderColor: 'white', // 边框颜色设置为白色
-            backgroundColor: selectedFilter === filter ? 'white' : 'transparent' // 选中的按钮背景为白色
+            margin: '0 8px', 
+            color: selectedFilter === filter ? 'darkslategray' : 'white', 
+            borderColor: 'white', 
+            backgroundColor: selectedFilter === filter ? 'white' : 'transparent' 
           }}
         >
           {switchFilter(filter)}
@@ -157,7 +157,6 @@ const Content = ({ selectedItem, secondaryFilter}) => {
   );
 };
 
-// 主组件
 const DataAnalysis = () => {
   const [selectedItem, setSelectedItem] = useState('time');
   const [secondaryFilter, setSecondaryFilter] = useState('');
@@ -183,7 +182,6 @@ const DataAnalysis = () => {
       <Sidebar onItemSelected={(item) => {
         setSelectedItem(item);
         if (item !== selectedItem) {
-          // 只有当选择的项目改变时才更新 secondaryFilter
           const firstFilter = allFiltersMap[item] && allFiltersMap[item][0];
           setSecondaryFilter(firstFilter || ''); 
         }

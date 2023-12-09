@@ -8,8 +8,8 @@
 }
 
 .TrainingModelsContainer h1 {
-  margin-bottom: 20px; /* 增加标题下的外边距 */
-  padding: 10px 0; /* 增加标题的上下内边距 */
+  margin-bottom: 20px; 
+  padding: 10px 0; 
   margin-left: 50px;
 }
 .TrainingModelsContainer h3 {
@@ -20,8 +20,8 @@
 }
 
 .TrainingModelsContainer div {
-  margin-bottom: 20px; /* 增加段落下的外边距 */
-  padding: 50px; /* 增加段落的内边距 */
+  margin-bottom: 20px; 
+  padding: 50px; 
 }
 
 .table-container {

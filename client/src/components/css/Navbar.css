@@ -1,30 +1,29 @@
-/* Navbar.css */
 .navbar-container {
     padding: 10px;
-    margin-bottom: 20px; /* 如果需要的话，给导航栏下面一些空间 */
-    border-radius: 5px; /* 边框圆角 */
-    display: flex; /* 使用flex布局使链接水平排列 */
-    justify-content: space-around; /* 分散对齐链接 */
-    background: #f2f2f2; /* 背景颜色 */
+    margin-bottom: 20px; 
+    border-radius: 5px; 
+    display: flex;
+    justify-content: space-around; 
+    background: #f2f2f2; 
   }
   
   .navbar-container a {
-    text-decoration: none; /* 移除下划线 */
-    color: #333; /* 链接颜色 */
-    padding: 5px 10px; /* 链接内边距 */
-    border-radius: 3px; /* 链接的边框圆角 */
+    text-decoration: none; 
+    color: #333; 
+    padding: 5px 10px; 
+    border-radius: 3px; 
   }
   
   .navbar-container a:hover {
-    background: #ddd; /* 鼠标悬停时的背景颜色 */
-    color: #000; /* 鼠标悬停时的文字颜色 */
+    background: #ddd; 
+    color: #000; 
   }
 
   .navbar-logo {
-    position: absolute; /* 绝对定位 */
-    top: 2.5px; /* 距离顶部的距离 */
-    left: 0px; /* 距离右侧的距离 */
-    height: 45px; /* 设置图片高度，可以根据需要调整 */
+    position: absolute; 
+    top: 2.5px; 
+    left: 0px; 
+    height: 45px; 
     
   }
 
