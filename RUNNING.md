@@ -20,7 +20,7 @@ Using terminal 1 as frontend:
 
 ```bash
 # Starting from the FlightDelay_Analysis folder
-# Open frontend folder 
+# Open frontend folder
 cd ./client
 # install the dependencies in package.json
 npm i
@@ -34,10 +34,8 @@ Using another terminal 2 as backend:
 
 ```bash
 # Starting from the FlightDelay_Analysis folder
-# Open backend folder 
+# Open backend folder
 cd ./backend
-# (for macOS) enter the venv vitural environment
-source venv/bin/activate
 # (for Windows) enter the venv vitural environment
 source venv/Scripts/activate
 # start the backend server on port "http://127.0.0.1:5000"

@@ -1,5 +1,5 @@
 from Prediction import Predict
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify,  send_from_directory
 from flask_cors import CORS
 
 
@@ -44,9 +44,16 @@ session = create_session()
 def get_value(string_name, df):
    return ([value for value in df[string_name]])
 
-app = Flask(__name__)
-# CORS(app, resources={r"/*": {"origins": "http://52.9.248.230:3000"}})
-CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
+app = Flask(__name__, static_folder='../client/build')
+CORS(app)
+
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def serve(path):
+    if path != "" and os.path.exists(app.static_folder + '/' + path):
+        return send_from_directory(app.static_folder, path)
+    else:
+        return send_from_directory(app.static_folder, 'index.html')
 
 def sort_month(data):
          month_order = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
@@ -127,9 +134,6 @@ for file_name in file_list:
       data_list.append(get_value('avg_delay_time', df))
       flattened_list = [item for sublist in data_list for item in sublist]
 
-@app.route('/')
-def hello_world():
-	return 'Check 123'
 
 @app.route("/dataCheck")
 def getData():
