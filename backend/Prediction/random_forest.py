@@ -66,7 +66,6 @@ df['DEP_DELAY_Category'] = df['DEP_DELAY'].apply(categorize_delay_biary)
 # 划分数据集
 X = df.drop(['DEP_DELAY_Category', 'DEP_DELAY'], axis=1)
 y = df['DEP_DELAY_Category']
-
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
 
 # 训练随机森林模型
