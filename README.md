@@ -2,7 +2,7 @@
 
 ## Project Introduction
 
-Inspired by [a Kaggle dataset](https://www.kaggle.com/datasets/threnjen/2019-airline-delays-and-cancellations), our group decided to further investigate the relationship between airport weather conditions and flight delays/cancellations. Notice that this Kaggle dataset is made by joining two public datasets from which limited attributes are included and only data in 2019 was used. From the source datasets, we found that the source dataset contains a wealth of relevant attributes, which has rich potential that we can do more research by using more attributes and expanding the target year from a single year to several years.
+Inspired by the [a Kaggle dataset](https://www.kaggle.com/datasets/threnjen/2019-airline-delays-and-cancellations), our group decided to further investigate the relationship between airport weather conditions and flight delays/cancellations. Notice that this Kaggle dataset is made by joining two public datasets from which limited attributes are included and only data in 2019 was used. From the source datasets, we found that the source dataset contains a wealth of relevant attributes, which has rich potential that we can do more research by using more attributes and expanding the target year from a single year to several years.
 
 ## Project Data Source
 
